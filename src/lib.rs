@@ -4,9 +4,11 @@ extern crate assert_float_eq;
 pub mod cie;
 pub mod hyperbolic;
 
+use cie::CIELAB;
+pub use cie::SRGB;
 
-use cie::{SRGB,CIELAB};
 use hyperbolic::HPoint;
+use num_complex::Complex;
 
 
 
@@ -17,12 +19,23 @@ pub struct H99{
 }
 
 
+impl H99{
+    pub fn new(luma : f64, chroma_poincare : Complex<f64>)->Self{
+        H99{luma,chroma:HPoint(chroma_poincare)}
+    }
+}
+
 
 
 const HYPER_R : f64 = 28.6;
 
 //45°
 const THERMAL_ANGLE : f64 = 0.78539816339;
+
+
+
+
+
 
 impl From<CIELAB> for H99{
     fn from(lab:CIELAB) -> Self{
@@ -34,25 +47,28 @@ impl From<CIELAB> for H99{
         let g = (e99c*e99c + f99c*f99c).sqrt();
 
         let h99c = f99c.atan2(e99c) - THERMAL_ANGLE;
+
         let chroma99c = 23.0 * (1.+0.066*g).ln();
 
         let geodesic_radius = chroma99c / HYPER_R;
 
-        let t = geodesic_radius.cosh();
-        let r = geodesic_radius.sinh();
+        let r = (geodesic_radius/2.0).tanh();
+
 
         let x = r*h99c.cos();
         let y = r*h99c.sin();
 
-        H99{luma:l99c,chroma:HPoint::new(t,x,y)}
+        H99{luma:l99c,chroma : HPoint(Complex{re:x,im:y})}
     }
 }
 
 impl From<H99> for CIELAB {
     fn from(h99: H99) -> Self {
         let l99c = h99.luma;
-        let (t,x,y) = h99.chroma.txy();
-        let geodesic_radius = t.acosh();
+        
+        let geodesic_radius = h99.chroma.distance(&HPoint::ORIGIN);
+        let (x,y) = (h99.chroma.0.re,h99.chroma.0.im);
+        
         let h99c = y.atan2(x) + THERMAL_ANGLE;
 
         let chroma99c = geodesic_radius * HYPER_R;
@@ -104,14 +120,14 @@ mod tests {
         let tlab : CIELAB = trgb.into();
 
         let th99 : H99 = tlab.into();
-        assert_f64_near!(th99.chroma.norm2(),1.0,64);
+        // assert_f64_near!(th99.chroma.norm2(),1.0,64);
 
         let back : CIELAB = th99.into();
 
         
 
         assert_f64_near!(tlab.a_star,back.a_star);
-        assert_f64_near!(tlab.l_star,back.l_star,256);
+        assert_f64_near!(tlab.l_star,back.l_star,64);
 
     }
 }
