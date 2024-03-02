@@ -96,14 +96,14 @@ fn lin2s(clin:f64)->f64{
 }
 
 
-fn rgb2XYZ(r:f64,g:f64,b:f64) -> CIEXYZ {
+fn rgb_to_xyz(r:f64,g:f64,b:f64) -> CIEXYZ {
     let x = r * 0.4124 + g * 0.3576 + b * 0.1805;
     let y = r * 0.2126 + g * 0.7152 + b * 0.0722;
     let z = r * 0.0193 + g * 0.1192 + b * 0.9505;
     CIEXYZ{x,y,z}
 }
 
-fn XYZ2rgb(xyz:CIEXYZ)->(f64,f64,f64){
+fn xyz_to_rgb(xyz:CIEXYZ)->(f64,f64,f64){
     let (x,y,z) = (xyz.x,xyz.y,xyz.z);
     let r = x*3.2404542 +y*-1.5371385 +z*-0.4985314;
     let g = x*-0.9692660  +y*1.8760108 + z*0.0415560;
@@ -165,13 +165,13 @@ impl From<SRGB> for CIEXYZ {
         let lin_r = s2lin(srgb.r);
         let lin_g = s2lin(srgb.g);
         let lin_b = s2lin(srgb.b);
-        rgb2XYZ(lin_r, lin_g, lin_b)
+        rgb_to_xyz(lin_r, lin_g, lin_b)
     }
 }
 
 impl From<CIEXYZ> for SRGB {
     fn from(xyz: CIEXYZ) -> Self {
-        let (linr,ling,linb) = XYZ2rgb(xyz);
+        let (linr,ling,linb) = xyz_to_rgb(xyz);
         let r = lin2s(linr);
         let g = lin2s(ling);
         let b = lin2s(linb);
@@ -185,23 +185,23 @@ impl From<CIEXYZ> for SRGB {
 
 #[inline]
 fn labf(t:f64)->f64{
-    const delta : f64 = 6./29.;
-    if t > delta*delta*delta{
+    const DELTA : f64 = 6./29.;
+    if t > DELTA*DELTA*DELTA{
         t.powf(1./3.)
     }
     else{
-        t / (delta*delta*3.0) + 4./29.
+        t / (DELTA*DELTA*3.0) + 4./29.
     }
 }
 
 #[inline]
 fn labinvf(t:f64)->f64{
-    const delta : f64 = 6./29.;
-    if t > delta{
+    const DELTA : f64 = 6./29.;
+    if t > DELTA{
         t*t*t
     }
     else{
-        3.*delta*delta*(t - 4./29.)
+        3.*DELTA*DELTA*(t - 4./29.)
     }
 }
 

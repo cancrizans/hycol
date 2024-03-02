@@ -1,13 +1,11 @@
 #[macro_use]
 extern crate assert_float_eq;
 
-use nalgebra::Normed;
-
 pub mod cie;
 pub mod hyperbolic;
 
-use num_complex::Complex;
-use cie::{SRGB,CIELAB,CIEXYZ};
+
+use cie::{SRGB,CIELAB};
 use hyperbolic::HPoint;
 
 
@@ -88,59 +86,6 @@ impl From<H99> for SRGB{
         SRGB::from(CIELAB::from(value))
     }
 }
-
-
-impl H99 {
-    fn to_srgb_in_gamut(&self) -> SRGB{
-        const RANGE : f64 = 0.65;
-        const DELTA : f64 = 2.0;
-        let poinchroma = self.chroma.poinc();
-        if poinchroma.norm_squared() > RANGE*RANGE {return SRGB::BLACK;}
-
-        let mut luma = self.luma;
-
-        for _ in 0..30{
-            if !(0.0..100.0).contains(&luma){break;}
-
-            let rgb = SRGB::from(H99{luma,chroma:self.chroma});
-            if rgb.in_gamut(){return rgb}
-
-            if rgb.sub_gamut(){
-                luma += DELTA;
-                continue;
-            }
-
-            if rgb.super_gamut(){
-                luma -= DELTA;
-            }
-
-
-        }
-
-        SRGB::BLACK
-    }
-
-    fn to_srgb_in_gamut_polar(&self,pow:f64) -> SRGB{
-        let poles_h99 : Vec<H99> = SRGB::GAMUT_POLES.iter().map(|&p|p.into()).collect();
-
-        let inv_distances : Vec<f64> = poles_h99.iter().map(|&p|
-            (p.chroma.distance(&self.chroma)).powf(-pow)
-        ).collect();
-
-        let tot_inv_dist : f64 = inv_distances.iter().sum();
-
-        let luma : f64 = inv_distances.iter().zip(poles_h99).map(|(d,p)|
-            (p.luma)*d/tot_inv_dist 
-        ).sum();
-
-        SRGB::from(H99{luma,chroma:self.chroma})
-    }
-
-}
-
-
-
-
 
 
 
