@@ -57,14 +57,26 @@ impl H99{
 
         (lumadist2+chromadist2).sqrt()
     }
+
+
+    const MIN_NEUTRAL_TEMPERATURE : f64 = -1.076;
+    const MAX_NEUTRAL_TEMPERATURE : f64 = 1.624;
+    const COOLEST_NEUTRAL_LUMA : f64 = 85.938;
+    const WARMEST_NEUTRAL_LUMA : f64 = 65.3611;
+    pub fn neutral(temperature : f64) -> H99{
+        let lambda = (temperature - Self::MIN_NEUTRAL_TEMPERATURE) / (Self::MAX_NEUTRAL_TEMPERATURE - Self::MIN_NEUTRAL_TEMPERATURE);
+        let chroma = HPoint(Complex{re: (temperature*0.5).tanh(),im:0.0});
+        let luma = (1.0-lambda)*Self::COOLEST_NEUTRAL_LUMA + lambda*Self::WARMEST_NEUTRAL_LUMA;
+        H99{luma,chroma}
+    }
 }
 
 
 
-const HYPER_R : f64 = 28.6;
+pub const HYPER_R : f64 = 28.6;
 
 //40°
-const THERMAL_ANGLE : f64 = 0.6981317007977318;
+pub const THERMAL_ANGLE : f64 = 0.6981317007977318;
 
 
 
