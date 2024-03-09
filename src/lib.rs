@@ -1,3 +1,6 @@
+//!Library for computations and conversions involving the HYCOL
+//!hyperbolic color space.
+
 #[macro_use]
 extern crate assert_float_eq;
 
@@ -15,25 +18,45 @@ use num_complex::Complex;
 
 
 #[derive(Clone, Copy)]
-pub struct H99{
+///Represents a color in the HYCOL model in any thermal frame.
+///The reference frame is not stored with the object. By
+///default, conversions from other color spaces to HYCOL are
+///in the T=0 "cold" frame where CIELAB grey is at the origin.
+pub struct Hycol{
+    ///luminance coordinate from l = 0 (black) to l = 100 (white)
     pub luma : f64,
+    //hyperbolic chroma coordinate
     pub chroma : hyperbolic::HPoint
 }
 
 
-impl H99{
+impl Hycol{
+    ///Creates a new HYCOL color from a luminance value and
+    /// Poincaré disk chroma.
     pub fn new(luma : f64, chroma_poincare : Complex<f64>)->Self{
-        H99{luma,chroma:HPoint(chroma_poincare)}
+        Hycol{luma,chroma:HPoint(chroma_poincare)}
     }
 
-    pub fn hlerp2(c1:H99,c2:H99,t:f64) -> H99{
+    ///Two-color geodesic blend, or linear interpolation. The
+    /// convention is such that t=0 yields c1, and t=1 yields
+    /// c2. The blend is geodesic in the sense that t spanning
+    /// from 0 to 1 traces the shortest path according to the 
+    /// color distance metric and with unit speed. So for example
+    /// dist(hlerp2(c1,c2,t),c1) == t \* dist(c1,c2)
+    /// dist(hlerp2(c1,c2,t),c2) == (1-t) \* dist(c1,c2)
+    pub fn hlerp2(c1:Hycol,c2:Hycol,t:f64)->Hycol{
         assert!((0.0..=1.0).contains(&t));
         let luma = (1.0-t)*c1.luma + t*c2.luma;
         let chroma = HPoint::hlerp2(c1.chroma,c2.chroma,t);
-        H99{luma,chroma}
+        Hycol{luma,chroma}
     }
 
-    pub fn hlerp3(c1:H99,c2:H99,c3:H99,l1:f64,l2:f64)->H99{
+    ///Three-color geodesic blend, defining a triangular field.
+    /// The convention is such that l1 and l2 are the weights
+    /// of c1 and c2 respectively, with l3 assumed so that
+    /// l1+l2+l3 == 1. If any of the weights are zero, this
+    /// reduces to hlerp2 on the other two. 
+    pub fn hlerp3(c1:Hycol,c2:Hycol,c3:Hycol,l1:f64,l2:f64)->Hycol{
         const TOL : f64 = 1e-9;
         let range = -TOL..=1.0+TOL;
 
@@ -47,11 +70,13 @@ impl H99{
         let l3 = 1.0-l1-l2;
         let luma = l1*c1.luma + l2*c2.luma + l3*c3.luma;
         let chroma = HPoint::hlerp3(c1.chroma, c2.chroma, c3.chroma, l1, l2);
-        H99{luma,chroma}
+        Hycol{luma,chroma}
 
     }
 
-    pub fn distance(&self, other : &H99)->f64{
+    ///Color difference geodesic distance. This is units so
+    /// that the difference between black and white is 100.
+    pub fn distance(&self, other : &Hycol)->f64{
         let lumadist2 = (self.luma-other.luma).powi(2);
         let chromadist2 = (HYPER_R*self.chroma.distance(&other.chroma)).powi(2);
 
@@ -63,16 +88,27 @@ impl H99{
     const MAX_NEUTRAL_TEMPERATURE : f64 = 1.624;
     const COOLEST_NEUTRAL_LUMA : f64 = 85.938;
     const WARMEST_NEUTRAL_LUMA : f64 = 65.3611;
-    pub fn neutral(temperature : f64) -> H99{
+
+    ///This provides neutral color aka whitepoint (with a somewhat arbitrary luma)
+    /// of a given temperature, in the default frame. If the coordinates of a
+    /// whitepoint are desired in another frame, temperature
+    /// should be replaced with the relative temperature which is
+    /// the temperature of the whitepoint minus that of the frame.
+    /// # Arguments
+    /// * `temperature` - temperature of the desired whitepoint. 
+    /// The neutral will be in gamut in the rough range -1.07 < temperature < 1.62
+    pub fn neutral(temperature : f64) -> Hycol{
         let lambda = (temperature - Self::MIN_NEUTRAL_TEMPERATURE) / (Self::MAX_NEUTRAL_TEMPERATURE - Self::MIN_NEUTRAL_TEMPERATURE);
         let chroma = HPoint(Complex{re: (temperature*0.5).tanh(),im:0.0});
         let luma = (1.0-lambda)*Self::COOLEST_NEUTRAL_LUMA + lambda*Self::WARMEST_NEUTRAL_LUMA;
-        H99{luma,chroma}
+        Hycol{luma,chroma}
     }
 }
 
 
-
+///Curvature radius of the chromaticity hyperbolic plane, in
+/// units of perceptual luma difference such that black and
+/// white are at distance 100.
 pub const HYPER_R : f64 = 28.6;
 
 //40°
@@ -86,7 +122,7 @@ fn hk_f1(hue:f64)->f64{
 }
 
 
-impl From<CIELAB> for H99{
+impl From<CIELAB> for Hycol{
     fn from(lab:CIELAB) -> Self{
         let (l_star, a_star, b_star) = (lab.l_star, lab.a_star, lab.b_star);
         
@@ -125,12 +161,12 @@ impl From<CIELAB> for H99{
 
 
 
-        H99{luma:l99c,chroma}
+        Hycol{luma:l99c,chroma}
     }
 }
 
-impl From<H99> for CIELAB {
-    fn from(h99: H99) -> Self {
+impl From<Hycol> for CIELAB {
+    fn from(h99: Hycol) -> Self {
         let l99c = h99.luma;
         
         let geodesic_radius = h99.chroma.distance(&HPoint::ORIGIN);
@@ -166,22 +202,22 @@ impl From<H99> for CIELAB {
     }
 }
 
-impl From<SRGB> for H99 {
+impl From<SRGB> for Hycol {
     fn from(srgb: SRGB) -> Self {
-        H99::from(CIELAB::from(srgb))
+        Hycol::from(CIELAB::from(srgb))
     }
 }
 
-impl From<H99> for SRGB{
-    fn from(value: H99) -> Self {
+impl From<Hycol> for SRGB{
+    fn from(value: Hycol) -> Self {
         SRGB::from(CIELAB::from(value))
     }
 }
 
 
 pub fn meshed_triangle(
-    v1 : H99, v2 : H99, v3 : H99, n : usize
-)-> Vec<((f64,f64), H99 )>{
+    v1 : Hycol, v2 : Hycol, v3 : Hycol, n : usize
+)-> Vec<((f64,f64), Hycol )>{
     let mut weights = Vec::with_capacity((n*n)/2);
 
     for i in 0..n{
@@ -192,11 +228,11 @@ pub fn meshed_triangle(
         }
     }
 
-    let center = H99::hlerp3(v1, v2, v3, 1./3., 1./3.).chroma;
+    let center = Hycol::hlerp3(v1, v2, v3, 1./3., 1./3.).chroma;
     
 
     weights.iter().map(|(l1,l2)| {
-        let c = H99::hlerp3(v1, v2, v3, *l1, *l2);
+        let c = Hycol::hlerp3(v1, v2, v3, *l1, *l2);
         (c.chroma.equidistant_azimuthal(&center), c)
     }
     ).collect()
@@ -212,14 +248,14 @@ mod tests {
     use assert_float_eq::assert_f64_near;
 
     use crate::cie::{CIELAB, SRGB};
-    use super::H99;
+    use super::Hycol;
 
     #[test]
     fn hyper_roundtrips() {
         let trgb = SRGB{r:0.3,g:0.01,b:0.8};
         let tlab : CIELAB = trgb.into();
 
-        let th99 : H99 = tlab.into();
+        let th99 : Hycol = tlab.into();
         // assert_f64_near!(th99.chroma.norm2(),1.0,64);
 
         let back : CIELAB = th99.into();
@@ -241,7 +277,7 @@ mod tests {
         // assert_f64_near!(red.b,redbacklab.b);
 
 
-        let hred = H99::from(red);
+        let hred = Hycol::from(red);
         let redback = SRGB::from(hred);
 
         println!("redback {redback:?}");
@@ -255,14 +291,14 @@ mod tests {
 
     #[test]
     fn color_distance(){
-        let c = H99::new(0.5,0.0.into());
-        let cup = H99::new(0.5+0.1,0.0.into());
-        let cdown = H99::new(0.5-0.1,0.0.into());
+        let c = Hycol::new(0.5,0.0.into());
+        let cup = Hycol::new(0.5+0.1,0.0.into());
+        let cdown = Hycol::new(0.5-0.1,0.0.into());
 
         assert_f64_near!(c.distance(&c),0.);
         assert_f64_near!(c.distance(&cup),c.distance(&cdown));
 
-        let hred = H99::from(SRGB::RED);
+        let hred = Hycol::from(SRGB::RED);
 
         assert_f64_near!(hred.distance(&hred),0.0);
 
@@ -274,30 +310,30 @@ mod tests {
         let red = SRGB{r:1.0,g:0.0,b:0.0};
         let blue = SRGB{r:0.0,g:0.0,b:1.0};
 
-        let hred = H99::from(red);
-        let hblue = H99::from(blue);
+        let hred = Hycol::from(red);
+        let hblue = Hycol::from(blue);
 
-        let vertred = H99::hlerp2(hred, hblue, 0.);
+        let vertred = Hycol::hlerp2(hred, hblue, 0.);
         assert_f64_near!(vertred.chroma.0.re,hred.chroma.0.re);
 
-        let hcyan = H99::from(SRGB{r:0.0,g:1.0,b:1.0});
+        let hcyan = Hycol::from(SRGB{r:0.0,g:1.0,b:1.0});
 
-        let hl2 = H99::hlerp2(hred, hcyan, 0.5);
-        let hl3 = H99::hlerp3(hblue, hred, hcyan, 0.0, 0.5);
+        let hl2 = Hycol::hlerp2(hred, hcyan, 0.5);
+        let hl3 = Hycol::hlerp3(hblue, hred, hcyan, 0.0, 0.5);
 
         assert_f64_near!(hl2.distance(&hl3),0.0);
 
-        let hl3_bis = H99::hlerp3(hred, hcyan, hblue, 0.5, 0.5);
+        let hl3_bis = Hycol::hlerp3(hred, hcyan, hblue, 0.5, 0.5);
         assert_f64_near!(hl2.distance(&hl3_bis),0.0);
     }
 
     #[test]
     fn more_lerptest(){
-        let hred = H99::from(SRGB::RED);
-        let hcyan = H99::from(SRGB::CYAN);
-        let hyellow = H99::from(SRGB::YELLOW);
+        let hred = Hycol::from(SRGB::RED);
+        let hcyan = Hycol::from(SRGB::CYAN);
+        let hyellow = Hycol::from(SRGB::YELLOW);
 
-        let blend = H99::hlerp3(hyellow, hred, hcyan, 0.333, 0.333);
+        let blend = Hycol::hlerp3(hyellow, hred, hcyan, 0.333, 0.333);
 
         assert_f64_near!(blend.distance(&blend),0.0);
     }

@@ -1,7 +1,11 @@
+///A color in the sRGB color space.
 #[derive(Debug,Copy,Clone)]
 pub struct SRGB {
+    ///red component in range 0..1
     pub r:f64,
+    ///green component in range 0..1
     pub g:f64,
+    ///blue component in range 0..1
     pub b:f64
 }
 
@@ -12,6 +16,8 @@ impl PartialEq for SRGB{
 }
 
 impl SRGB {
+    ///Convert into [u8;3] in 0-255 range. If the color is
+    /// out of gamut this is UB.
     pub fn to_u8(self)->[u8;3]{
         [
             (self.r * 255.0) as u8,
@@ -20,27 +26,31 @@ impl SRGB {
         ]
     }
 
+    ///Convert to HTML/CSS ready string
     pub fn to_html(self)->String{
         let (r,g,b) = self.to_u8().into();
-
         format!("rgb({},{},{})",r,g,b)
     }
 
+    ///Test if in the sRGB gamut, with some tolerance.
     pub fn in_gamut(self)->bool{
         const TOL : f64 = 0.003; 
         let gamut = -TOL..=1.0+TOL;
         gamut.contains(&self.r) & gamut.contains(&self.g) & gamut.contains(&self.b)
     }
 
+    ///Test if any channel is below zero.
     pub fn sub_gamut(self)->bool{
         (self.r < 0.0) | (self.g < 0.0) | (self.b < 0.0)
     }
 
+    ///Test if any channel is above one.
     pub fn super_gamut(self)->bool{
         (self.r > 1.0) | (self.g > 1.0) | (self.b > 1.0)
     }
 
 
+    
     pub const BLACK : SRGB = SRGB{r:0.,g:0.,b:0.};
     pub const RED : SRGB = SRGB{r:1.,g:0.,b:0.};
     pub const GREEN : SRGB = SRGB{r:0.,g:1.,b:0.};
@@ -48,11 +58,25 @@ impl SRGB {
     pub const CYAN : SRGB = SRGB{r:0.,g:1.,b:1.};
     pub const MAGENTA : SRGB = SRGB{r:1.,g:0.,b:1.};
     pub const YELLOW : SRGB = SRGB{r:1.,g:1.,b:0.};
+    pub const WHITE : SRGB = SRGB{r:1.,g:1.,b:1.};
 
+    ///These are the six corners of the sRGB cube (out of 8)
+    /// which lie on the boundary of the chroma gamut in HYCOL,
+    /// in counter-clockwise order, so red, yellow, green,
+    /// cyan, blue, magenta.
     pub const GAMUT_POLES : [SRGB;6] = [
         Self::RED,Self::YELLOW,Self::GREEN,
         Self::CYAN,Self::BLUE,Self::MAGENTA
     ];
+
+    ///Linear interpolation of raw sRGB values
+    pub fn gamma_lerp2(c1:SRGB,c2:SRGB,t:f64)->SRGB{
+        SRGB{
+            r: (1.-t)*c1.r + t*c2.r,
+            g: (1.-t)*c1.g + t*c2.g,
+            b: (1.-t)*c1.b + t*c2.b,
+        }
+    }
 }
 
 impl From<[u8;3]> for SRGB{
@@ -289,24 +313,8 @@ mod tests {
 
     #[test]
     fn cie_roundtrips() {
-        let (tr,tg,tb) = xyz_to_rgb(CIEXYZ{x:0.5,y:0.5,z:0.5});
-        let txyz = rgb_to_xyz(tr, tg, tb);
-
-        // assert_f64_near!(txyz.x,0.5,1024);
-        // assert_f64_near!(txyz.y,0.5,1024);
-        // assert_f64_near!(txyz.z,0.5,1024);
-
-
 
         let testsrgb = SRGB{r:0.3,g:0.01,b:0.8};
-        let testsrgb_xyz: CIEXYZ = testsrgb.into();
-        let testsrgb_rt : SRGB = testsrgb_xyz.into();
-
-        // assert_f64_near!(testsrgb.r,testsrgb_rt.r);
-        // assert_f64_near!(testsrgb.g,testsrgb_rt.g);
-        // assert_f64_near!(testsrgb.b,testsrgb_rt.b);
-
-        //assert_eq!(testsrgb.to_u8(), testsrgb_rt.to_u8());
 
 
         for ti in 0..20{

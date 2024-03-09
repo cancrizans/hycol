@@ -1,37 +1,17 @@
 use num_complex::Complex;
 
 #[derive(Copy,Clone,Debug)]
+///Point in the hyperbolic plane represented as a complex number
+/// in the Poincaré disk model
 pub struct HPoint(pub Complex<f64>);
-// #[derive(Copy,Clone)]
-// pub struct HTransform(Matrix3<f64>);
-
-
 
 
 impl HPoint {
-    // pub fn new(t:f64,x:f64,y:f64)->HPoint{
-    //     let v = vector![t,x,y];
-    //     HPoint(v)
-    // }
 
     pub const ORIGIN : HPoint = HPoint(Complex{re:0.,im:0.});
 
-    // fn dot(&self,other:&HPoint) -> f64{
-    //     let v= self.0;
-    //     let w = other.0;
-    //     v[0]*w[0] - v[1]*w[1] - v[2]*w[2]
-    // }
-
-    // pub fn norm2(&self) -> f64{
-    //     self.dot(self)
-    // }
-
-    // pub fn quick_normalize(self) -> HPoint{
-    //     let xi = self.norm2() - 1.0;
-    //     let factor = 1.0 - 0.5 * xi;
-    //     HPoint(factor*self.0)
-    // }
-
+    ///Geodesic distance between two points, in units of the
+    /// radius of curvature.
     pub fn distance(&self, other : &HPoint) -> f64{
         let (u,v) = (self.0,other.0);
         let delta : f64 = 2.0* (u-v).norm_sqr() / ( (1.-u.norm_sqr())*(1.-v.norm_sqr()));
@@ -39,24 +19,16 @@ impl HPoint {
         (1.0+delta).acosh()
     }
 
-
-    // #[inline]
-    // pub fn txy(&self) -> (f64,f64,f64){
-    //     (self.0[0],self.0[1],self.0[2])
-    // }
-
+    ///Poincaré disk representation as a complex number w with |w|<1 
     #[inline]
     pub fn poinc(&self) -> Complex<f64>{
         self.0
     }
 
-    // #[inline]
-    // pub fn from_poinc(y:Complex<f64>)->Self{
-    //     let y2 = y.norm_sqr();
-    //     let fac = 1.0/(1.-y2);
-    //     Self::new(fac*(1.+y2), fac*y.re, fac*y.im)
-    // }
 
+    ///Position in an equidistant azimuthal chart centered
+    ///around another point. The euclidean distance and angle
+    /// relative to the center are accurate.
     pub fn equidistant_azimuthal(self,center:&HPoint)->(f64,f64){
         let rel = HPoint(-center.0).translate(self);
         let logrel = rel.hlog();
@@ -95,6 +67,11 @@ impl HPoint {
         HPoint((p + q)/(q.conj()*p + 1.))
     }
 
+    ///Hyperbolic linear interpolation between two points.
+    /// Note that the convention is as in typical lerp functions,
+    /// so that t=0 yields v1 and t=1 yields v2. Values in 0..1
+    /// move along the geodesic segment from v1 to v2 at constant
+    /// speed.
     pub fn hlerp2(
         v1:HPoint,v2:HPoint,t:f64
     )-> HPoint{
@@ -103,14 +80,17 @@ impl HPoint {
         Self::hlerp(vec![(1.0-t,v1),(t,v2)])
     }
 
+
+    ///Hyperbolic linear interpolation between three points,
+    /// also known as weighted mean. Note l1 and l2 are the
+    /// weights of v1 and v2, with the last weight l3 assumed
+    /// to be such that l1 + l2 + l3 == 1. This formally generalizes
+    /// the weighted mean l1\*v1 + l2\*v2 + l3\*v3, which as written
+    /// is undefined as the hyperbolic plane is not an affine space.
     pub fn hlerp3(
         v1:HPoint,v2:HPoint,v3:HPoint,
         l1:f64,l2:f64
     )->HPoint{
-        
-        // let range = 0.0..=1.0;
-        // assert!(range.contains(&l1));
-        // assert!(range.contains(&l2));
 
         Self::hlerp(vec![
             (l1,v1),(l2,v2),(1.0-l1-l2,v3)
@@ -172,45 +152,7 @@ impl HPoint {
 
 }
 
-// impl Mul<HPoint> for HTransform {
-//     type Output = HPoint;
-//     fn mul(self, rhs: HPoint) -> Self::Output {
-//         HPoint(self.0 * rhs.0)
-//     }
-// }
 
-// impl Mul<HTransform> for HTransform{
-//     type Output = HTransform;
-//     fn mul(self, rhs: HTransform) -> Self::Output {
-//         HTransform(self.0 * rhs.0)
-//     }
-// }
-
-// impl HTransform{
-//     pub fn inverse(self) -> HTransform{
-//         HTransform(self.0.try_inverse().unwrap())
-//     }
-
-//     pub fn rotation(angle:f64)-> HTransform{
-//         let (s,c) = angle.sin_cos();
-//         HTransform(matrix![
-//             1., 0., 0.;
-//             0., c, -s;
-//             0., s,  c
-//         ])
-//     }
-
-//     pub fn translation_x(displacement:f64) -> HTransform{
-//         let (s,c) = (displacement.sinh(), displacement.cosh());
-//         HTransform(matrix![
-//             c, s, 0.;
-//             s, c, 0.;
-//             0.,0.,1.
-//         ])
-//     }
-
-
-// }
 
 #[cfg(test)]
 mod tests {
