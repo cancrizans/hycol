@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+html {
+  font-size: 100%;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+body {
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: #222;
+  font-size: 16px;
+  line-height: 1.7;
+  padding: 1em;
+  margin: auto;
+  max-width: 50em;
+  background: #fefefe; }
+
+.ctile, .ctile-0, .ctile-1, .ctile-2, .ctile-3, .ctile-4, .ctile-5, .ctile-6, .ctile-7, .ctile-8, .ctile-9, .ctile-10, .ctile-11, .ctile-12, .ctile-13 {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: inline-block;
+  text-align: center;
+  font-style: normal;
+  font-weight: bold; }
+
+.ctile-0 {
+  background-color: #f76c40; }
+
+.ctile-1 {
+  background-color: #f0802f; }
+
+.ctile-2 {
+  background-color: #e69121; }
+
+.ctile-3 {
+  background-color: #d7a212; }
+
+.ctile-4 {
+  background-color: #bfb024; }
+
+.ctile-5 {
+  background-color: #a2ba4c; }
+
+.ctile-6 {
+  background-color: #84bf7b; }
+
+.ctile-7 {
+  background-color: #72c0a9; }
+
+.ctile-8 {
+  background-color: #78baca; }
+
+.ctile-9 {
+  background-color: #94afd8; }
+
+.ctile-10 {
+  background-color: #bc9cd3; }
+
+.ctile-11 {
+  background-color: #e383b7; }
+
+.ctile-12 {
+  background-color: #fb6d8d; }
+
+.ctile-13 {
+  background-color: #fe6361; }
+
+/*# sourceMappingURL=style.css.map */

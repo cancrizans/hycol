@@ -1,8 +1,4 @@
----
-name: harmony
-title: Color Harmony
----
-
+# Color Harmony
 
 ## Complementarity and Skin Frame
 
@@ -16,7 +12,7 @@ Two chromaticities are complementary in a given frame if the (hyperbolic) straig
 
 The D65 whitepoint, the "true" grey, defines a frame which is related the physiology of human vision. Complementaries in this frame are opponents of the opponent process theory. Afterimages of a certain color are in its opponent complementary, for example in this well-known illusion:
 
-![](/assets/opponent_illusion.gif)
+![](assets/opponent_illusion.gif)
 
 Staring at the cross for enough time makes a green dot appear in the moving vacancy - this is because green is the opponent complementary to magenta, *because* they are collinear with the grey of the background.
 
@@ -26,11 +22,11 @@ The prototypical clashing pair is red and green: <i class="ctile-13"></i> <i cla
 
 I have performed an experiment and acquired data to precisely determine which pairs of colors are harmonic complementaries. If we draw the segments between them, they *roughly* appear to be passing through a single point:
 
-![](/assets/complementarity_data.png)
+![](assets/complementarity_data.png)
 
 This harmonic center, which I've fixed at $$w=0.25 + 0.1i$$ is a decidedly orange-ish chromaticity which happens to be, roughly, that of human skin (of various ethnicities). It looks like this at various lumas
 
-![](/assets/skincenter.png)
+![](assets/skincenter.png)
 
 The significance of a match with skin tones is probably a rabbit hole best left for spare afternoons. Still, we can term this the skin center, defining a **skin frame**. For some reason, harmony is relative to the skin frame. After transforming ("boosting") to the skin frame, the definition of hues and their spacing is completely different from D65. These new, harmonic hues shrink the space dedicated to cool colors and expand the accuracy on warm hues, due to the inherently warm bias of the whitepoint. 
 
@@ -63,7 +59,7 @@ For the skin frame hues in the 14-tone system I've chosen the following naming c
 
 The diagram below depicts the extents of the sRGB gamut in the skin frame with marked hue spokes, and the max-saturation colors of each hue. (For this guide we will use more subdued representative tones since the wild fluctuations in luma and saturation on the gamut boundary can be confusing). Also marked, with greek letters, the RGB primaries and secundaries, displaying misalignment with the new categories (e.g., primary red is decidedly warm).
 
-![](/assets/skinframe_gamut.png)
+![](assets/skinframe_gamut.png)
 
 Observe that D65 greys, including full black and full white, are exactly halfway between n and b, meaning their complementary axis is as far as possible from o and c. This is convenient for digital art as it allows the use of full black and white while minimizing the risk of clashing with intermediate tones, if o and c are preferred.
 
@@ -80,7 +76,7 @@ Harmonic coloring is based on two principles:
 
 These are forces in opposition: clearly complementary colors have the greatest contrast, yet the best choice for a dichromatic piece is an interval which is as large as possible without being dissonant. Since complementaries are separated by 7 steps, this optimal choice is a 6-step interval we call a **resonant**. Every tone has two resonants going clockwise or counter-clockwise. This is the 14 tones connected by resonance; since 6 is even (and so is 14), resonances have the same parity, thus there is an even cycle of resonants **voygnlp** and an odd cycle **chxtbmr**, analogous to the circle of fifths in music.
 
-![](/assets/star.png)
+![](assets/star.png)
 
 Working only with resonants is quite boring and static; some variation in relationship between the hues can expand the emotional range of a piece. While the contrast is lesser, an interval of 5 steps is also quite pleasant, and it could be called a **semi-resonant**. Here is all the possible intervals, sorted by increasing dissonance, with my interpretation:
 
@@ -95,7 +91,7 @@ Working only with resonants is quite boring and static; some variation in relati
 |1 | Minor Analogous | Dissonant: complementary of resonant |   <i class="ctile-13"></i> <i class="ctile-0"></i> |   <i class="ctile-13"></i> <i class="ctile-12"></i> |
 |7 | Complementary | Highly displeasing | <i class="ctile-13"></i> <i class="ctile-6"></i> |
 
-![](/assets/combinatoric_modes.png)
+![](assets/combinatoric_modes.png)
 
 ### Axial complementarity
 
@@ -109,7 +105,7 @@ The triad should be thought of as an arrow pointing to the key, it is inherently
 
 A triad can certainly not have any complementaries among its vertices. In addition, it should envelop the harmonic center, so the base vertices should be on opposite sides of the complementary to the key. Finally, since the key should be emphasized, the interval of the base must be smaller than those from the base to the key. This only leaves four possibilities:
 
-![](/assets/triads.png)
+![](assets/triads.png)
 
 The key is positioned on the right, and I have further marked tones that have been excluded due to complementarity. 
 
@@ -123,7 +119,7 @@ The **narrow** triads are similar, but not identical, to Fletcher's. They are as
 
 Given what we know about harmony so far, the abstract color wheel with analogous tones adjacent is not a particularly convenient representation. We can lift a page from music theory again and construct a two-dimensional lattice (tonnetz) where each edge represents a particular consonant interval:
 
-![](/assets/lattice.png)
+![](assets/lattice.png)
 
 A portion of a Neo-Riemannian style lattice for the 14-tone system. The lattice is periodic. Dotted lines represent adjoints, solid line are resonants, and dashed lines are semi-resonants. Every triangle is a narrow triad, and each tone is the key for the triads directly above and below it.
 

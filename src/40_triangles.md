@@ -1,8 +1,7 @@
----
-title: Triangular Blending and Fields
----
+# Triangular Blending and Fields
 
-*wip: rewrite for jekyll markdown*
+
+*wip: rewrite for pandoc markdown*
 
 The fundamental object that the theory is based on is the **geodesic gradient**, which is the "optimal" interpolation between two colours (the vertices), in the sense that it involves the least possible perceived total colour variation and that such perceived change occurs at constant speed. This is geometrically the geodesic segment between two points, which is the shortest path and, by necessity, of curvature zero.
 

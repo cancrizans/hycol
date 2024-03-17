@@ -1,6 +1,5 @@
----
-title: Temperature and Reference Frames
----
+# Temperature and Reference Frames
+
 
 ### Horocyclic Temperature
 
@@ -20,4 +19,4 @@ Then isotherms must meet the thermal axis at right angle, and their temperature 
 *wip*
 
 
-![](/assets/isotherm_strips.png)
+![](assets/isotherm_strips.png)

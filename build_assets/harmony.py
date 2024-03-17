@@ -115,5 +115,5 @@ _ = " ".join(scss_tonelist)
 _ = "---\n---\n" 
 scss =  "//Auto-generated\n"+ "\n" + "\n".join(scss_tones)
 
-with open('_sass/_tones.scss','w') as f:
+with open('sass/tones.scss','w') as f:
     f.write(scss)

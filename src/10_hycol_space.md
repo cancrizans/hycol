@@ -2,11 +2,11 @@
 title: The HYCOL color space
 ---
 
-HYCOL is a color space I've designed which represents colors as points in a hyperbolic geometry. Specifically, a color is represented by its luma (aka luminance, or value), and chroma (aka chromaticity), and chroma is understood as a point of the two-dimensional hyperbolic plane, $$\mathbb{H}^2$$, while luma lies on a half-line. HYCOL is constructed to have, to reasonable accuracy, the following useful properties:
+HYCOL is a color space I've designed which represents colors as points in a hyperbolic geometry. Specifically, a color is represented by its luma (aka luminance, or value), and chroma (aka chromaticity), and chroma is understood as a point of the two-dimensional hyperbolic plane, $\mathbb{H}^2$, while luma lies on a half-line. HYCOL is constructed to have, to reasonable accuracy, the following useful properties:
 
 - **Perceptual uniformity**, meaning that the perceived color difference, or perceived total variation in a gradient, should be proportional to the geometric distance according to the metric.
 - **Perceived luminance and chromaticity constancy**, meaning that colors at the same luma should be perceived as equally luminous, and colors at the same chroma at different lumas should be perceived as roughly different shades of the same hue and saturation.
-- **Simple and highly symmetric geometry**, in our case $$\mathbb{H}^2$$, to provide clear and efficiently computable geometric formulations of color theory concepts.
+- **Simple and highly symmetric geometry**, in our case $\mathbb{H}^2$, to provide clear and efficiently computable geometric formulations of color theory concepts.
 
 I want the enforcement of these principles to only really be realized within the sRGB gamut and for LCD screens, which is a small subset of the full gamut of physically realizable colors, and then also only really within the range of variation in digital displays and viewing conditions around the sRGB standard.
 
@@ -21,13 +21,13 @@ It's well known that color spaces based on addition of three primaries, like for
 
 ### Hue Superimportance
 
-Hue superimportance is the observation that for saturated colors variations in hue produce a perceived variation which is greater than expected. We can make this more precise. In the wheel below, the spokes are all of equal length, in the sense that from grey up to the rim of the wheel we perceive roughly the same total variation as the color saturates. This total variation is the radius $$R$$ of the wheel.
+Hue superimportance is the observation that for saturated colors variations in hue produce a perceived variation which is greater than expected. We can make this more precise. In the wheel below, the spokes are all of equal length, in the sense that from grey up to the rim of the wheel we perceive roughly the same total variation as the color saturates. This total variation is the radius $R$ of the wheel.
 
-![](/assets/wheel_euclidean.png)
+![](assets/wheel_euclidean.png)
 
-If Euclidean geometry applied, then, the circumference itself should have a length $$2\pi R$$, and we should perceive colors to be varying around at the same speed as in the spokes, because the literal length of the Euclidean circle on our hopefully flat screen is supposedly proportional to that variation. Instead, if you pay close attention, you'll see that the change is quite a bit faster, almost twice as fast. We could draw a more accurate wheel like this:
+If Euclidean geometry applied, then, the circumference itself should have a length $2\pi R$, and we should perceive colors to be varying around at the same speed as in the spokes, because the literal length of the Euclidean circle on our hopefully flat screen is supposedly proportional to that variation. Instead, if you pay close attention, you'll see that the change is quite a bit faster, almost twice as fast. We could draw a more accurate wheel like this:
 
-![](/assets/wheel_wavy.png)
+![](assets/wheel_wavy.png)
 
 This fact, which is sometimes informally stated as "there are more than 360° worth of hue at high saturation", implies that the geometry of the chroma plane is not flat, and since it's always a super-importance and never a sub-importance, it must have negative curvature.
 
@@ -35,10 +35,10 @@ This fact, which is sometimes informally stated as "there are more than 360° wo
 
 The HK effect is an odd perceptual phenomenon where certain very saturated colors appear brighter than they actually are.  For example, the following colours in each image have all the same CIELAB luminance, which is the same as the grey in the background:
 
-![](/assets/hk_15.png)
-![](/assets/hk_30.png)
-![](/assets/hk_50.png)
-![](/assets/hk_70.png)
+![](assets/hk_15.png)
+![](assets/hk_30.png)
+![](assets/hk_50.png)
+![](assets/hk_70.png)
 
 Most existing colorspaces choose not to account for the HK effect, as it can be unreliable, has psychological components, and is most importantly dependent on the quality of the observed surface.
 
@@ -50,7 +50,7 @@ The HK effect increases with saturation, and it is stronger for darker luminance
 
 ### Chroma to DIN99c
 
-Let a colour be expressed in CIELAB space as luma $$L^*$$ and chromaticity $$a^*,b^*$$. 
+Let a colour be expressed in CIELAB space as luma $L^*$ and chromaticity $a^*,b^*$. 
 
 First, we convert chroma to the H99 space:
 
@@ -78,19 +78,19 @@ Finally, we perform the conversion to DIN99c luma, but employing the HK-correcte
 
 $$l = l_{\mathrm{99c}} = 317.65 \ln(1+0.0037 L^{**})$$
 
-At this point, we have $$(l,C_{\mathrm{99c}},h_{\mathrm{99c}})$$ polar DIN99c coordinates with HK-effect correction.
+At this point, we have $(l,C_{\mathrm{99c}},h_{\mathrm{99c}})$ polar DIN99c coordinates with HK-effect correction.
 
 ### Hyperbolicization
 
-We then perform "hyperbolicization" by interpreting $$C_{\mathrm{99c}}$$ as a geodesic radius in the hyperbolic plane:
+We then perform "hyperbolicization" by interpreting $C_{\mathrm{99c}}$ as a geodesic radius in the hyperbolic plane:
 
 $$\rho = C_{\mathrm{99c}} / R$$
 
-$$R = 28.6$$ is the radius of curvature of the chromaticity plane in units of DIN99c chromaticity, and thus $$\rho$$ is the geodesic distance of the colour from the pure grey (D65) of the same luminance. Therefore, finally:
+$R = 28.6$ is the radius of curvature of the chromaticity plane in units of DIN99c chromaticity, and thus $\rho$ is the geodesic distance of the colour from the pure grey (D65) of the same luminance. Therefore, finally:
 
 $$w_0 = \tanh\left(\frac{\rho}{2}\right) e^{i(h_{\mathrm{99c}} + \theta_T)}$$
 
-where the thermal angle $$\theta_T = 40°$$ is such that the warmest hue (an orange-ish red) is along the positive real axis.
+where the thermal angle $\theta_T = 40°$ is such that the warmest hue (an orange-ish red) is along the positive real axis.
 
 $$w_0$$ lies in the disk $$\vert w_0\vert < 1$$ and represents a point in the Poincaré disk model of the hyperbolic plane. The colour space thus defined through $$(l,w)$$ with the colour distance geometry $$\mathbb{R}^+\times \mathbb{H}^2$$, or precisely
 
@@ -114,7 +114,7 @@ The range of $$l$$ is from 0 (sRGB black) to 100 (sRGB white). $$w$$ lies in the
 
 In the diagram, a few slice gamuts are displayed in the Poincaré disk model of chroma space, bounded by the outline of the full gamut.
 
-![](/assets/gamuts.png)
+![](assets/gamuts.png)
 
 The full gamut is the shape, vaguely circular, outlined by six smooth segments. This boundary is the image of the hexagon of the sRGB primaries and secundaries in the order red -> yellow -> green -> cyan -> blue -> magenta -> red. The images of these segments are not themselves straight segments, and do bulge out considerably.
 

@@ -1,7 +1,7 @@
----
-name: appendix_models
-title: "Appendix: Models of the Hyperbolic plane"
----
+# Appendix
+
+## Models of the Hyperbolic plane
+
 
 
 ### Poincaré Disk
@@ -18,7 +18,7 @@ Angles are accurately represented.
 
 The metric is
 
-$$ds^2 = \frac{4|dw|^2}{(1-|w|^2)^2}$$
+$ds^2 = \frac{4|dw|^2}{(1-|w|^2)^2}$
 
 Isometries are given by Moebius transformations in $PSU(1,1)$, so of the form
 
@@ -32,7 +32,7 @@ where $|u|^2-|v|^2 = 1$. This is actually a double cover, so it's necessary to q
 Parametrized by complex $z = x+iy$ with $y = \Im{z} > 0$. This is a conformal model. The conformal boundary is given by the real axis $\Im{z} = 0$ compactified with the one point $z=\infty$.
 
 The representation of geometric objects are as such:
-- Lines: generalized circular arcs which meet the boundary at right angles. (Including vertical lines which are understood to meet $z=\infty$ at $90°$)
+- Lines: generalized circular arcs which meet the boundary at right angles. (Including vertical lines which are understood to meet $z=\infty$ at 90°)
 - Circles: Euclidean circles contained entirely within the disk. 
 - Horocycles: Euclidean circles tangent to the boundary. (Including horizontal lines)
 - Hypercycles: generalized circular arcs that meet the boundary at non-right angles. (Including any lines not horizontal nor vertical)
@@ -61,6 +61,6 @@ Also known as the Riemann Sphere's Cayley transform.
 
 This is assuming the convention of $w = 1 \rightarrow z = \infty$, $w = -1 \rightarrow z = 0$.
 
-$$z = -i\frac{w+1}{w-1}$$
+$$ z = -i \frac{w+1}{w-1} $$
 
 $$w = \frac{z-i}{z+i}$$
