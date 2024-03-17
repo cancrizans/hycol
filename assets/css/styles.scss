@@ -1,0 +1,41 @@
+---
+---
+@use 'sass:list';
+@import "{{ site.theme }}";
+
+@import "tones";
+
+.ctile {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: inline-block;
+
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+
+    // @for $i from 0 through 13 {
+    //     &-#{$i} {
+    //         @extend .ctile;
+
+    //         background-color: #{unquote("$reptone-#{$i}"));
+    //     }
+    // }
+}
+
+.ctile-0{@extend .ctile;background-color: $reptone-0;}
+.ctile-1{@extend .ctile;background-color: $reptone-1;}
+.ctile-2{@extend .ctile;background-color: $reptone-2;}
+.ctile-3{@extend .ctile;background-color: $reptone-3;}
+.ctile-4{@extend .ctile;background-color: $reptone-4;}
+.ctile-5{@extend .ctile;background-color: $reptone-5;}
+.ctile-6{@extend .ctile;background-color: $reptone-6;}
+.ctile-7{@extend .ctile;background-color: $reptone-7;}
+.ctile-8{@extend .ctile;background-color: $reptone-8;}
+.ctile-9{@extend .ctile;background-color: $reptone-9;}
+.ctile-10{@extend .ctile;background-color: $reptone-10;}
+.ctile-11{@extend .ctile;background-color: $reptone-11;}
+.ctile-12{@extend .ctile;background-color: $reptone-12;}
+.ctile-13{@extend .ctile;background-color: $reptone-13;}
+

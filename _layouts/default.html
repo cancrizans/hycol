@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html %}
+  <link rel="stylesheet" href="{{'/assets/css/styles.css' | absolute_url}}">
+  <body>
+    
+    {% if page.header != nil %}
+      {% if page.header %}
+        {% include {{ page.header }} %}
+      {% endif %}
+    {% else %}
+      {% if site.header %}
+        {% include {{ site.header }} %}
+      {% else %}
+        {% include header.html %}
+      {% endif %}
+    {% endif %}
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+          {% include navbar.html %}
+          {{ content }}
+        </div>
+      </main>
+    {% include footer.html %}
+  </body>
+</html>
