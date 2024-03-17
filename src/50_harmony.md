@@ -32,6 +32,17 @@ The significance of a match with skin tones is probably a rabbit hole best left 
 
 In the skin frame, D65 itself is not neutral anymore, and it is perceived to have a **blue** hue, with mild saturation. This means that, as such, it really is harmonic complementary to orange, and this is true at all luma. We can therefore conclude, somewhat humorously but with reasonable motivation, that **white is complementary to orange**, and they will indeed clash if the alignment is correct.
 
+Here is the geodesic gradient between two (harmonic) complementaries: as expected, the gradient passes through the skin center, and consequently, the pairing is unpleasant in character.
+
+![](assets/geograd_comp.png)
+
+In a way, complementary pairs "cancel out" and blend into nothing, assuming we understand human skin as a default non-statement.
+
+Instead, if we shift one of the colors slightly, the geodesic segment misses the skin center and the pairing improves considerably in appeal, as their geodesic blend acquires a very slight greenish-yellowish tint from skin tone:
+
+![](assets/geograd_reso.png)
+
+We will see shortly that such "near misses" are indeed what we should strategically target to employ colors in an aesthetically pleasing manner.
 
 
 ## 14-tone system
