@@ -92,7 +92,7 @@ $$w_0 = \tanh\left(\frac{\rho}{2}\right) e^{i(h_{\mathrm{99c}} + \theta_T)}$$
 
 where the thermal angle $\theta_T = 40°$ is such that the warmest hue (an orange-ish red) is along the positive real axis.
 
-$$w_0$$ lies in the disk $$\vert w_0\vert < 1$$ and represents a point in the Poincaré disk model of the hyperbolic plane. The colour space thus defined through $$(l,w)$$ with the colour distance geometry $$\mathbb{R}^+\times \mathbb{H}^2$$, or precisely
+$w_0$ lies in the disk $\vert w_0\vert < 1$ and represents a point in the Poincaré disk model of the hyperbolic plane. The colour space thus defined through $(l,w)$ with the colour distance geometry $\mathbb{R}^+\times \mathbb{H}^2$, or precisely
 
 $$dE^2 = dl^2 + R^2\left(\frac{4|dw_0|^2}{(1-|w_0|^2)^2} \right)$$
 
@@ -108,9 +108,9 @@ with the temperature of the warm whitepoint $N_W$ set to $T_W = 0.25$. This is a
 
 ## Summary and Gamuts
 
-The final $$(l,w)$$ tuple constitute our hyperbolic model of colours. Only a small fraction of the domain is actually occupied by a given gamut. Our interest is specifically in the sRGB gamut. We assume the standard sRGB primary specifications and the D65 whitepoint for conversion sRGB -> CIEXYZ -> CIELAB.
+The final $(l,w)$ tuple constitute our hyperbolic model of colours. Only a small fraction of the domain is actually occupied by a given gamut. Our interest is specifically in the sRGB gamut. We assume the standard sRGB primary specifications and the D65 whitepoint for conversion sRGB -> CIEXYZ -> CIELAB.
 
-The range of $$l$$ is from 0 (sRGB black) to 100 (sRGB white). $$w$$ lies in the unit disk, but in practice for reasonable whitepoints most of the gamut is within $$\vert w\vert<0.75$$. At fixed $$l$$ we have a notion of *slice gamut*, which is always contained in the **full gamut**, which is the region in $$\mathbb{H}^2$$ of all possible values of $$w$$ for colours in the sRGB gamut. 
+The range of $l$ is from 0 (sRGB black) to 100 (sRGB white). $w$ lies in the unit disk, but in practice for reasonable whitepoints most of the gamut is within $\vert w\vert<0.75$. At fixed $l$ we have a notion of *slice gamut*, which is always contained in the **full gamut**, which is the region in $\mathbb{H}^2$ of all possible values of $w$ for colours in the sRGB gamut. 
 
 In the diagram, a few slice gamuts are displayed in the Poincaré disk model of chroma space, bounded by the outline of the full gamut.
 

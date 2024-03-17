@@ -24,7 +24,7 @@ I have performed an experiment and acquired data to precisely determine which pa
 
 ![](assets/complementarity_data.png)
 
-This harmonic center, which I've fixed at $$w=0.25 + 0.1i$$ is a decidedly orange-ish chromaticity which happens to be, roughly, that of human skin (of various ethnicities). It looks like this at various lumas
+This harmonic center, which I've fixed at $w=0.25 + 0.1i$ is a decidedly orange-ish chromaticity which happens to be, roughly, that of human skin (of various ethnicities). It looks like this at various lumas
 
 ![](assets/skincenter.png)
 
@@ -125,7 +125,7 @@ A portion of a Neo-Riemannian style lattice for the 14-tone system. The lattice 
 
 For example, y is the bottom vertex of the narrow triad y/b/p, with y as the key, p as the base resonant, and b as the semi-resonant. However, it shares an edge with the narrow triad p/y/t, with now p as the key, y as the base resonant, and t as the semi-resonant. Joined together, the two triads assemble in a four-tone object including y,b,p and t, and with the new interval b-t which is a major analogous.
 
-The tonnetz also places at maximum distance colors which are complementaries or mediants, providing a further rationalization of why they're perceived as displeasing -- they are "distant" in terms of the number of resonant steps that must be taken to bring one to the other. In this picture (which is to be understood as more poetic than literal), r and g are offending to the eye because the eye is invited to imagine, for example, that the relationship of g to r is that g is resonant to p, which is semi-resonant to t, which is resonant to r, but also the inverted path r -> x -> v -> g. The complexity and ambiguity of the relationship is too much for immediate comprehension, as is the case, for example for r and t.
+The tonnetz also places at maximum distance colors which are complementaries or mediants, providing a further rationalization of why they're perceived as displeasing -- they are "distant" in terms of the number of resonant steps that must be taken to bring one to the other. In this picture (which is to be understood as more poetic than literal), r and g are offending to the eye because the eye is invited to imagine, for example, that the relationship of g to r is that g is resonant to p, which is semi-resonant to t, which is resonant to r, but also the inverted path r -> x -> v -> g. The complexity and ambiguity of the relationship is too much for intuitive comprehension, which contrasts with the immediacy, for example, of the resonance between r and t.
 
 ### Value
 
