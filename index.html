@@ -17,7 +17,6 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="style.css" />
   <!--[if lt IE 9]>
@@ -32,11 +31,9 @@
 points in a hyperbolic geometry. Specifically, a color is represented by
 its luma (aka luminance, or value), and chroma (aka chromaticity), and
 chroma is understood as a point of the two-dimensional hyperbolic plane,
-<img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathbb%7BH%7D%5E2"
-alt="\mathbb{H}^2" title="\mathbb{H}^2" class="math inline" />, while
-luma lies on a half-line. HYCOL is constructed to have, to reasonable
-accuracy, the following useful properties:</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>ℍ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\mathbb{H}^2</annotation></semantics></math>,
+while luma lies on a half-line. HYCOL is constructed to have, to
+reasonable accuracy, the following useful properties:</p>
 <ul>
 <li><strong>Perceptual uniformity</strong>, meaning that the perceived
 color difference, or perceived total variation in a gradient, should be
@@ -47,11 +44,9 @@ luminous, and colors at the same chroma at different lumas should be
 perceived as roughly different shades of the same hue and
 saturation.</li>
 <li><strong>Simple and highly symmetric geometry</strong>, in our case
-<img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathbb%7BH%7D%5E2"
-alt="\mathbb{H}^2" title="\mathbb{H}^2" class="math inline" />, to
-provide clear and efficiently computable geometric formulations of color
-theory concepts.</li>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>ℍ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\mathbb{H}^2</annotation></semantics></math>,
+to provide clear and efficiently computable geometric formulations of
+color theory concepts.</li>
 </ul>
 <p>I want the enforcement of these principles to only really be realized
 within the sRGB gamut and for LCD screens, which is a small subset of
@@ -98,20 +93,19 @@ variations in hue produce a perceived variation which is greater than
 expected. We can make this more precise. In the wheel below, the spokes
 are all of equal length, in the sense that from grey up to the rim of
 the wheel we perceive roughly the same total variation as the color
-saturates. This total variation is the radius <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20R" alt="R"
-title="R" class="math inline" /> of the wheel.</p>
+saturates. This total variation is the radius
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+of the wheel.</p>
 <p><img src="assets/wheel_euclidean.png" /></p>
 <p>If Euclidean geometry applied, then, the circumference itself should
-have a length <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%202%5Cpi%20R"
-alt="2\pi R" title="2\pi R" class="math inline" />, and we should
-perceive colors to be varying around at the same speed as in the spokes,
-because the literal length of the Euclidean circle on our hopefully flat
-screen is supposedly proportional to that variation. Instead, if you pay
-close attention, you’ll see that the change is quite a bit faster,
-almost twice as fast. We could draw a more accurate wheel like this:</p>
+have a length
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">2\pi R</annotation></semantics></math>,
+and we should perceive colors to be varying around at the same speed as
+in the spokes, because the literal length of the Euclidean circle on our
+hopefully flat screen is supposedly proportional to that variation.
+Instead, if you pay close attention, you’ll see that the change is quite
+a bit faster, almost twice as fast. We could draw a more accurate wheel
+like this:</p>
 <p><img src="assets/wheel_wavy.png" /></p>
 <p>This fact, which is sometimes informally stated as “there are more
 than 360° worth of hue at high saturation”, implies that the geometry of
@@ -147,28 +141,14 @@ way to reds, and has a narrow dip in strength around yellow, being
 mostly non-existent for yellow hues.</p>
 <h2 id="details-of-the-mapping">Details of the Mapping</h2>
 <h3 id="chroma-to-din99c">Chroma to DIN99c</h3>
-<p>Let a colour be expressed in CIELAB space as luma <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20L%5E%2A"
-alt="L^*" title="L^*" class="math inline" /> and chromaticity <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20a%5E%2A%2Cb%5E%2A"
-alt="a^*,b^*" title="a^*,b^*" class="math inline" />.</p>
+<p>Let a colour be expressed in CIELAB space as luma
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mo>*</mo></msup><annotation encoding="application/x-tex">L^*</annotation></semantics></math>
+and chromaticity
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mo>*</mo></msup><mo>,</mo><msup><mi>b</mi><mo>*</mo></msup></mrow><annotation encoding="application/x-tex">a^*,b^*</annotation></semantics></math>.</p>
 <p>First, we convert chroma to the H99 space:</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Ctilde%7Bb%7D%20%3D%200.94%5Ccdot%20b%5E%2A"
-alt="\tilde{b} = 0.94\cdot b^*" title="\tilde{b} = 0.94\cdot b^*"
-class="math display" /></p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20C_%7B%5Cmathrm%7B99c%7D%7D%20%3D%2023%20%5Cln%5Cleft%281%2B0.066%20%5Csqrt%7B%28a%5E%2A%29%5E2%20%2B%20%5Ctilde%7Bb%7D%5E2%7D%5Cright%29"
-alt="C_{\mathrm{99c}} = 23 \ln\left(1+0.066 \sqrt{(a^*)^2 + \tilde{b}^2}\right)"
-title="C_{\mathrm{99c}} = 23 \ln\left(1+0.066 \sqrt{(a^*)^2 + \tilde{b}^2}\right)"
-class="math display" /></p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20h_%7B%5Cmathrm%7B99c%7D%7D%20%3D%20%5Coperatorname%7Batan2%7D%28%5Ctilde%7Bb%7D%2Fa%5E%2A%29"
-alt="h_{\mathrm{99c}} = \operatorname{atan2}(\tilde{b}/a^*)"
-title="h_{\mathrm{99c}} = \operatorname{atan2}(\tilde{b}/a^*)"
-class="math display" /></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>b</mi><mo accent="true">̃</mo></mover><mo>=</mo><mn>0.94</mn><mo>⋅</mo><msup><mi>b</mi><mo>*</mo></msup></mrow><annotation encoding="application/x-tex">\tilde{b} = 0.94\cdot b^*</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub><mo>=</mo><mn>23</mn><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mn>0.066</mn><msqrt><mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>a</mi><mo>*</mo></msup><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mover><mi>b</mi><mo accent="true">̃</mo></mover><mn>2</mn></msup></mrow></msqrt><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">C_{\mathrm{99c}} = 23 \ln\left(1+0.066 \sqrt{(a^*)^2 + \tilde{b}^2}\right)</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub><mo>=</mo><mo>atan2</mo><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>b</mi><mo accent="true">̃</mo></mover><mi>/</mi><msup><mi>a</mi><mo>*</mo></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">h_{\mathrm{99c}} = \operatorname{atan2}(\tilde{b}/a^*)</annotation></semantics></math></p>
 <h3 id="helmholtz-kohlrausch-correction">Helmholtz-Kohlrausch
 Correction</h3>
 <p>Then, we perform correction of luminance to account for the
@@ -177,80 +157,42 @@ performed in DIN99c chroma coordinates instead of CIELAB, with minimal
 impact.</p>
 <p>First we compute the strength of the HK effect according to hue, with
 the characteristic dip around yellow.</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20f_1%28h_%5Cmathrm%7B99c%7D%29%20%3D%200.116%20%5Cleft%7C%5Csin%5Cleft%28%5Cfrac%7Bh_%5Cmathrm%7B99c%7D-90%C2%B0%7D%7B2%7D%20%5Cright%29%5Cright%7C%20%2B0.085"
-alt="f_1(h_\mathrm{99c}) = 0.116 \left|\sin\left(\frac{h_\mathrm{99c}-90°}{2} \right)\right| +0.085"
-title="f_1(h_\mathrm{99c}) = 0.116 \left|\sin\left(\frac{h_\mathrm{99c}-90°}{2} \right)\right| +0.085"
-class="math display" /></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>h</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>0.116</mn><mrow><mo stretchy="true" form="prefix">|</mo><mo>sin</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><msub><mi>h</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub><mo>−</mo><mn>90</mn><mi>°</mi></mrow><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mo>+</mo><mn>0.085</mn></mrow><annotation encoding="application/x-tex">f_1(h_\mathrm{99c}) = 0.116 \left|\sin\left(\frac{h_\mathrm{99c}-90°}{2} \right)\right| +0.085</annotation></semantics></math></p>
 <p>Then we have the corrected luma:</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20L%5E%7B%2A%2A%7D%20%3D%20L%5E%2A%20%2B%20%5Cmu%20-%20%5Cnu%20L%5E%2A%5C%2C%2C%5Cquad%20%5Cmu%20%3D%202.5%5C%2Cf_1%20C_%7B%5Cmathrm%7B99c%7D%7D%5C%2C%2C%5Cquad%20%5Cnu%20%3D%200.025%20f_1%20C_%7B%5Cmathrm%7B99c%7D%7D"
-alt="L^{**} = L^* + \mu - \nu L^*\,,\quad \mu = 2.5\,f_1 C_{\mathrm{99c}}\,,\quad \nu = 0.025 f_1 C_{\mathrm{99c}}"
-title="L^{**} = L^* + \mu - \nu L^*\,,\quad \mu = 2.5\,f_1 C_{\mathrm{99c}}\,,\quad \nu = 0.025 f_1 C_{\mathrm{99c}}"
-class="math display" /></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>L</mi><mrow><mo>*</mo><mo>*</mo></mrow></msup><mo>=</mo><msup><mi>L</mi><mo>*</mo></msup><mo>+</mo><mi>μ</mi><mo>−</mo><mi>ν</mi><msup><mi>L</mi><mo>*</mo></msup><mspace width="0.167em"></mspace><mo>,</mo><mspace width="1.0em"></mspace><mi>μ</mi><mo>=</mo><mn>2.5</mn><mspace width="0.167em"></mspace><msub><mi>f</mi><mn>1</mn></msub><msub><mi>C</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub><mspace width="0.167em"></mspace><mo>,</mo><mspace width="1.0em"></mspace><mi>ν</mi><mo>=</mo><mn>0.025</mn><msub><mi>f</mi><mn>1</mn></msub><msub><mi>C</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub></mrow><annotation encoding="application/x-tex">L^{**} = L^* + \mu - \nu L^*\,,\quad \mu = 2.5\,f_1 C_{\mathrm{99c}}\,,\quad \nu = 0.025 f_1 C_{\mathrm{99c}}</annotation></semantics></math></p>
 <h3 id="luma-to-din99c">Luma to DIN99c</h3>
 <p>Finally, we perform the conversion to DIN99c luma, but employing the
 HK-corrected luma as input.</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20l%20%3D%20l_%7B%5Cmathrm%7B99c%7D%7D%20%3D%20317.65%20%5Cln%281%2B0.0037%20L%5E%7B%2A%2A%7D%29"
-alt="l = l_{\mathrm{99c}} = 317.65 \ln(1+0.0037 L^{**})"
-title="l = l_{\mathrm{99c}} = 317.65 \ln(1+0.0037 L^{**})"
-class="math display" /></p>
-<p>At this point, we have <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%28l%2CC_%7B%5Cmathrm%7B99c%7D%7D%2Ch_%7B%5Cmathrm%7B99c%7D%7D%29"
-alt="(l,C_{\mathrm{99c}},h_{\mathrm{99c}})"
-title="(l,C_{\mathrm{99c}},h_{\mathrm{99c}})" class="math inline" />
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mo>=</mo><msub><mi>l</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub><mo>=</mo><mn>317.65</mn><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mn>0.0037</mn><msup><mi>L</mi><mrow><mo>*</mo><mo>*</mo></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">l = l_{\mathrm{99c}} = 317.65 \ln(1+0.0037 L^{**})</annotation></semantics></math></p>
+<p>At this point, we have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo>,</mo><msub><mi>C</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub><mo>,</mo><msub><mi>h</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(l,C_{\mathrm{99c}},h_{\mathrm{99c}})</annotation></semantics></math>
 polar DIN99c coordinates with HK-effect correction.</p>
 <h3 id="hyperbolicization">Hyperbolicization</h3>
-<p>We then perform “hyperbolicization” by interpreting <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20C_%7B%5Cmathrm%7B99c%7D%7D"
-alt="C_{\mathrm{99c}}" title="C_{\mathrm{99c}}" class="math inline" />
+<p>We then perform “hyperbolicization” by interpreting
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub><annotation encoding="application/x-tex">C_{\mathrm{99c}}</annotation></semantics></math>
 as a geodesic radius in the hyperbolic plane:</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Crho%20%3D%20C_%7B%5Cmathrm%7B99c%7D%7D%20%2F%20R"
-alt="\rho = C_{\mathrm{99c}} / R" title="\rho = C_{\mathrm{99c}} / R"
-class="math display" /></p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20R%20%3D%2028.6"
-alt="R = 28.6" title="R = 28.6" class="math inline" /> is the radius of
-curvature of the chromaticity plane in units of DIN99c chromaticity, and
-thus <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Crho"
-alt="\rho" title="\rho" class="math inline" /> is the geodesic distance
-of the colour from the pure grey (D65) of the same luminance. Therefore,
-finally:</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20w_0%20%3D%20%5Ctanh%5Cleft%28%5Cfrac%7B%5Crho%7D%7B2%7D%5Cright%29%20e%5E%7Bi%28h_%7B%5Cmathrm%7B99c%7D%7D%20%2B%20%5Ctheta_T%29%7D"
-alt="w_0 = \tanh\left(\frac{\rho}{2}\right) e^{i(h_{\mathrm{99c}} + \theta_T)}"
-title="w_0 = \tanh\left(\frac{\rho}{2}\right) e^{i(h_{\mathrm{99c}} + \theta_T)}"
-class="math display" /></p>
-<p>where the thermal angle <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Ctheta_T%20%3D%2040%C2%B0"
-alt="\theta_T = 40°" title="\theta_T = 40°" class="math inline" /> is
-such that the warmest hue (an orange-ish red) is along the positive real
-axis.</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20w_0"
-alt="w_0" title="w_0" class="math display" /> lies in the disk <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cvert%20w_0%5Cvert%20%3C%201"
-alt="\vert w_0\vert &lt; 1" title="\vert w_0\vert &lt; 1"
-class="math display" /> and represents a point in the Poincaré disk
-model of the hyperbolic plane. The colour space thus defined through
-<img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%28l%2Cw%29"
-alt="(l,w)" title="(l,w)" class="math display" /> with the colour
-distance geometry <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cmathbb%7BR%7D%5E%2B%5Ctimes%20%5Cmathbb%7BH%7D%5E2"
-alt="\mathbb{R}^+\times \mathbb{H}^2"
-title="\mathbb{R}^+\times \mathbb{H}^2" class="math display" />, or
-precisely</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20dE%5E2%20%3D%20dl%5E2%20%2B%20R%5E2%5Cleft%28%5Cfrac%7B4%7Cdw_0%7C%5E2%7D%7B%281-%7Cw_0%7C%5E2%29%5E2%7D%20%5Cright%29"
-alt="dE^2 = dl^2 + R^2\left(\frac{4|dw_0|^2}{(1-|w_0|^2)^2} \right)"
-title="dE^2 = dl^2 + R^2\left(\frac{4|dw_0|^2}{(1-|w_0|^2)^2} \right)"
-class="math display" /></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><msub><mi>C</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub><mi>/</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">\rho = C_{\mathrm{99c}} / R</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mn>28.6</mn></mrow><annotation encoding="application/x-tex">R = 28.6</annotation></semantics></math>
+is the radius of curvature of the chromaticity plane in units of DIN99c
+chromaticity, and thus
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ρ</mi><annotation encoding="application/x-tex">\rho</annotation></semantics></math>
+is the geodesic distance of the colour from the pure grey (D65) of the
+same luminance. Therefore, finally:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mn>0</mn></msub><mo>=</mo><mo>tanh</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>ρ</mi><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>e</mi><mrow><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>h</mi><mrow><mn mathvariant="normal">99</mn><mi mathvariant="normal">c</mi></mrow></msub><mo>+</mo><msub><mi>θ</mi><mi>T</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msup></mrow><annotation encoding="application/x-tex">w_0 = \tanh\left(\frac{\rho}{2}\right) e^{i(h_{\mathrm{99c}} + \theta_T)}</annotation></semantics></math></p>
+<p>where the thermal angle
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>θ</mi><mi>T</mi></msub><mo>=</mo><mn>40</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">\theta_T = 40°</annotation></semantics></math>
+is such that the warmest hue (an orange-ish red) is along the positive
+real axis.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>0</mn></msub><annotation encoding="application/x-tex">w_0</annotation></semantics></math>
+lies in the disk
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">|</mo><msub><mi>w</mi><mn>0</mn></msub><mo stretchy="false" form="postfix">|</mo><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\vert w_0\vert &lt; 1</annotation></semantics></math>
+and represents a point in the Poincaré disk model of the hyperbolic
+plane. The colour space thus defined through
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo>,</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(l,w)</annotation></semantics></math>
+with the colour distance geometry
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>ℝ</mi><mo>+</mo></msup><mo>×</mo><msup><mi>ℍ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}^+\times \mathbb{H}^2</annotation></semantics></math>,
+or precisely</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><msup><mi>E</mi><mn>2</mn></msup><mo>=</mo><mi>d</mi><msup><mi>l</mi><mn>2</mn></msup><mo>+</mo><msup><mi>R</mi><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mn>4</mn><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>d</mi><msub><mi>w</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>w</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">dE^2 = dl^2 + R^2\left(\frac{4|dw_0|^2}{(1-|w_0|^2)^2} \right)</annotation></semantics></math></p>
 <p>is hypothesized to be perceptually uniform.</p>
 <!-- ### Whitepoint temperature shift
 
@@ -260,34 +202,28 @@ $$w = \frac{\ch{\frac{T}{2}}w_0 - \sh{\frac{T}{2}}}{-\sh{\frac{T}{2}}w_0 + \ch{\
 
 with the temperature of the warm whitepoint $N_W$ set to $T_W = 0.25$. This is an isometry, so $w$ also sees the same metric as $$w_0$$. -->
 <h2 id="summary-and-gamuts">Summary and Gamuts</h2>
-<p>The final <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%28l%2Cw%29"
-alt="(l,w)" title="(l,w)" class="math display" /> tuple constitute our
-hyperbolic model of colours. Only a small fraction of the domain is
-actually occupied by a given gamut. Our interest is specifically in the
-sRGB gamut. We assume the standard sRGB primary specifications and the
-D65 whitepoint for conversion sRGB -&gt; CIEXYZ -&gt; CIELAB.</p>
-<p>The range of <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20l" alt="l"
-title="l" class="math display" /> is from 0 (sRGB black) to 100 (sRGB
-white). <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20w" alt="w"
-title="w" class="math display" /> lies in the unit disk, but in practice
-for reasonable whitepoints most of the gamut is within <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cvert%20w%5Cvert%3C0.75"
-alt="\vert w\vert&lt;0.75" title="\vert w\vert&lt;0.75"
-class="math display" />. At fixed <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20l" alt="l"
-title="l" class="math display" /> we have a notion of <em>slice
-gamut</em>, which is always contained in the <strong>full
-gamut</strong>, which is the region in <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cmathbb%7BH%7D%5E2"
-alt="\mathbb{H}^2" title="\mathbb{H}^2" class="math display" /> of all
-possible values of <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20w" alt="w"
-title="w" class="math display" /> for colours in the sRGB gamut.</p>
+<p>The final
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo>,</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(l,w)</annotation></semantics></math>
+tuple constitute our hyperbolic model of colours. Only a small fraction
+of the domain is actually occupied by a given gamut. Our interest is
+specifically in the sRGB gamut. We assume the standard sRGB primary
+specifications and the D65 whitepoint for conversion sRGB -&gt; CIEXYZ
+-&gt; CIELAB.</p>
+<p>The range of
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>l</mi><annotation encoding="application/x-tex">l</annotation></semantics></math>
+is from 0 (sRGB black) to 100 (sRGB white).
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+lies in the unit disk, but in practice for reasonable whitepoints most
+of the gamut is within
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">|</mo><mi>w</mi><mo stretchy="false" form="postfix">|</mo><mo>&lt;</mo><mn>0.75</mn></mrow><annotation encoding="application/x-tex">\vert w\vert&lt;0.75</annotation></semantics></math>.
+At fixed
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>l</mi><annotation encoding="application/x-tex">l</annotation></semantics></math>
+we have a notion of <em>slice gamut</em>, which is always contained in
+the <strong>full gamut</strong>, which is the region in
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>ℍ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\mathbb{H}^2</annotation></semantics></math>
+of all possible values of
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+for colours in the sRGB gamut.</p>
 <p>In the diagram, a few slice gamuts are displayed in the Poincaré disk
 model of chroma space, bounded by the outline of the full gamut.</p>
 <p><img src="assets/gamuts.png" /></p>
@@ -339,9 +275,7 @@ equal saturation, are sharply seen to be colder. Consider the hyperbolic
 line from D65 white to vermillion, extended backwards as well into sky
 blue. We’ll call this the <strong>thermal axis</strong>, and HYCOL has
 been defined so that this is conveniently just the horizontal line of
-<img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20w%20%5Cin%20%5Cmathbb%7BR%7D"
-alt="w \in \mathbb{R}" title="w \in \mathbb{R}" class="math display" />.
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>∈</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">w \in \mathbb{R}</annotation></semantics></math>.
 It would be reasonable to define the temperature for colors on the
 thermal axis as the signed distance from white, and in fact we’ll see in
 a bit that this is sound. If we do, then translations along the thermal
@@ -369,252 +303,158 @@ segment between two points, which is the shortest path and, by
 necessity, of curvature zero.</p>
 <p>When a geodesic gradient stretches between two vertices with
 different luminance, the luminance changes at the same rate that the
-chromaticity does, relative to the total. For example, when we are <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%201%2F3"
-alt="1/3" title="1/3" class="math inline" /> of the way through from
-<img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20A" alt="A"
-title="A" class="math inline" /> to <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20B" alt="B"
-title="B" class="math inline" />, or equivalently we are performing a
-blend of <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20A" alt="A"
-title="A" class="math inline" /> and <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20B" alt="B"
-title="B" class="math inline" /> with weights <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%202%2F3"
-alt="2/3" title="2/3" class="math inline" /> and <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%201%2F3"
-alt="1/3" title="1/3" class="math inline" /> respectively, the luminance
-will be <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20l_%5Cmathrm%7Bblend%7D%20%3D%20%5Cfrac%7B2%7D%7B3%7D%20l_A%20%2B%20%5Cfrac%7B1%7D%7B3%7Dl_B"
-alt="l_\mathrm{blend} = \frac{2}{3} l_A + \frac{1}{3}l_B"
-title="l_\mathrm{blend} = \frac{2}{3} l_A + \frac{1}{3}l_B"
-class="math inline" />, <em>and</em> the chromaticity will be at a
-distance along the path in the same proportion: <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20d%28w_A%2Cw_%5Cmathrm%7Bblend%7D%29%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20d%28w_B%2Cw_%5Cmathrm%7Bblend%7D%29"
-alt="d(w_A,w_\mathrm{blend}) = \frac{1}{2} d(w_B,w_\mathrm{blend})"
-title="d(w_A,w_\mathrm{blend}) = \frac{1}{2} d(w_B,w_\mathrm{blend})"
-class="math inline" />. This follows from the fact that the colour
-metric is a product metric, and defines uniquely the geodesic gradient
-between any two colours, or equivalently the weighted blend between two
-colours <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20A" alt="A"
-title="A" class="math inline" />,<img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20B" alt="B"
-title="B" class="math inline" /> with weights <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Clambda_A%2C%5Clambda_B"
-alt="\lambda_A,\lambda_B" title="\lambda_A,\lambda_B"
-class="math inline" /> such that <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Clambda_A%2B%5Clambda_B%3D1"
-alt="\lambda_A+\lambda_B=1" title="\lambda_A+\lambda_B=1"
-class="math inline" />.</p>
+chromaticity does, relative to the total. For example, when we are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">1/3</annotation></semantics></math>
+of the way through from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
+or equivalently we are performing a blend of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+with weights
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">2/3</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">1/3</annotation></semantics></math>
+respectively, the luminance will be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>l</mi><mrow><mi mathvariant="normal">b</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">d</mi></mrow></msub><mo>=</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><msub><mi>l</mi><mi>A</mi></msub><mo>+</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msub><mi>l</mi><mi>B</mi></msub></mrow><annotation encoding="application/x-tex">l_\mathrm{blend} = \frac{2}{3} l_A + \frac{1}{3}l_B</annotation></semantics></math>,
+<em>and</em> the chromaticity will be at a distance along the path in
+the same proportion:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>w</mi><mi>A</mi></msub><mo>,</mo><msub><mi>w</mi><mrow><mi mathvariant="normal">b</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">d</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>w</mi><mi>B</mi></msub><mo>,</mo><msub><mi>w</mi><mrow><mi mathvariant="normal">b</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">d</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d(w_A,w_\mathrm{blend}) = \frac{1}{2} d(w_B,w_\mathrm{blend})</annotation></semantics></math>.
+This follows from the fact that the colour metric is a product metric,
+and defines uniquely the geodesic gradient between any two colours, or
+equivalently the weighted blend between two colours
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+with weights
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mi>A</mi></msub><mo>,</mo><msub><mi>λ</mi><mi>B</mi></msub></mrow><annotation encoding="application/x-tex">\lambda_A,\lambda_B</annotation></semantics></math>
+such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mi>A</mi></msub><mo>+</mo><msub><mi>λ</mi><mi>B</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\lambda_A+\lambda_B=1</annotation></semantics></math>.</p>
 <p>For the computational aspect, there is a closed form expression for
 such an interpolation as the hyperbolic equivalent of the SLERP
 operation for spherical geometry, sometimes called HLERP. However this
 is of limited use, since the generalization to a weighted blend of more
 than two colours, which we do require extensively, has no closed form
 solution anyway.</p>
-<p>We are interested in blending several colours <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20C_1%2C%20C_2%2C%5Cldots%2C%20C_n"
-alt="C_1, C_2,\ldots, C_n" title="C_1, C_2,\ldots, C_n"
-class="math inline" /> with weights <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Clambda_1%2C%5Cldots%2C%20%5Clambda_n"
-alt="\lambda_1,\ldots, \lambda_n" title="\lambda_1,\ldots, \lambda_n"
-class="math inline" /> that sum to one: <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Csum_i%20%5Clambda_i%20%3D%201"
-alt="\sum_i \lambda_i = 1" title="\sum_i \lambda_i = 1"
-class="math inline" />. (We will only need <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20n%3D3"
-alt="n=3" title="n=3" class="math inline" />, where HLERP is barycentric
-coordinates over a triangle, but no simplification is offered compared
-to the general case). Of course, we will blend lumas <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20l_i" alt="l_i"
-title="l_i" class="math inline" /> and chromas <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w_i" alt="w_i"
-title="w_i" class="math inline" /> separately with the same weights. For
-lumas, we just perform a regular linear interpolation. For hyperbolic
-chromas, defining a canonical weighted average in an arbitrary space is
-generally impossible, but there is a consistent way to do so for <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathbb%7BH%7D%5E2"
-alt="\mathbb{H}^2" title="\mathbb{H}^2" class="math inline" /> points
-due to its high degree of symmetry.</p>
+<p>We are interested in blending several colours
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mn>1</mn></msub><mo>,</mo><msub><mi>C</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>C</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">C_1, C_2,\ldots, C_n</annotation></semantics></math>
+with weights
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>λ</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">\lambda_1,\ldots, \lambda_n</annotation></semantics></math>
+that sum to one:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>i</mi></msub><msub><mi>λ</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\sum_i \lambda_i = 1</annotation></semantics></math>.
+(We will only need
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">n=3</annotation></semantics></math>,
+where HLERP is barycentric coordinates over a triangle, but no
+simplification is offered compared to the general case). Of course, we
+will blend lumas
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mi>i</mi></msub><annotation encoding="application/x-tex">l_i</annotation></semantics></math>
+and chromas
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mi>i</mi></msub><annotation encoding="application/x-tex">w_i</annotation></semantics></math>
+separately with the same weights. For lumas, we just perform a regular
+linear interpolation. For hyperbolic chromas, defining a canonical
+weighted average in an arbitrary space is generally impossible, but
+there is a consistent way to do so for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>ℍ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\mathbb{H}^2</annotation></semantics></math>
+points due to its high degree of symmetry.</p>
 <p>We impose the requirement that the n-fold HLERP reduces to the
 two-point geodesic HLERP when all the weights but two vanish:</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Coperatorname%7BHLERP%7D%28w_1%2C%5Clambda%3Bw_2%2C1-%5Clambda%3Bw_3%2C0%3Bw_4%2C0%2C%5Cldots%29%20%3D%20%5Coperatorname%7BHLERP%7D%28w_1%2C%5Clambda%3Bw_2%2C%5Clambda-1%29"
-alt="\operatorname{HLERP}(w_1,\lambda;w_2,1-\lambda;w_3,0;w_4,0,\ldots) = \operatorname{HLERP}(w_1,\lambda;w_2,\lambda-1)"
-title="\operatorname{HLERP}(w_1,\lambda;w_2,1-\lambda;w_3,0;w_4,0,\ldots) = \operatorname{HLERP}(w_1,\lambda;w_2,\lambda-1)"
-class="math display" /></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>HLERP</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>w</mi><mn>1</mn></msub><mo>,</mo><mi>λ</mi><mo>;</mo><msub><mi>w</mi><mn>2</mn></msub><mo>,</mo><mn>1</mn><mo>−</mo><mi>λ</mi><mo>;</mo><msub><mi>w</mi><mn>3</mn></msub><mo>,</mo><mn>0</mn><mo>;</mo><msub><mi>w</mi><mn>4</mn></msub><mo>,</mo><mn>0</mn><mo>,</mo><mi>…</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>HLERP</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>w</mi><mn>1</mn></msub><mo>,</mo><mi>λ</mi><mo>;</mo><msub><mi>w</mi><mn>2</mn></msub><mo>,</mo><mi>λ</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\operatorname{HLERP}(w_1,\lambda;w_2,1-\lambda;w_3,0;w_4,0,\ldots) = \operatorname{HLERP}(w_1,\lambda;w_2,\lambda-1)</annotation></semantics></math></p>
 <p>for triangles, for examples, this means that blends where one vertex
 has weight zero reduce to the blend between the remaining two
 vertices.</p>
 <p>The following definition successfully generalizes the Euclidean lerp
-to both spherical and hyperbolic geometry. The weighted average <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Coverline%7Bw%7D%20%3D%20%5Cbigoplus_i%20%5Clambda_i%20w_i"
-alt="\overline{w} = \bigoplus_i \lambda_i w_i"
-title="\overline{w} = \bigoplus_i \lambda_i w_i" class="math inline" />
+to both spherical and hyperbolic geometry. The weighted average
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>w</mi><mo accent="true">¯</mo></mover><mo>=</mo><msub><mo>⨁</mo><mi>i</mi></msub><msub><mi>λ</mi><mi>i</mi></msub><msub><mi>w</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\overline{w} = \bigoplus_i \lambda_i w_i</annotation></semantics></math>
 is the unique point that minimizes the objective function:</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20J%28w%29%20%3D%20%5Cfrac%7B1%7D%7B2%7D%5Csum_i%20%5Clambda_i%20%5C%2Cd%28w%2Cw_i%29%5E2"
-alt="J(w) = \frac{1}{2}\sum_i \lambda_i \,d(w,w_i)^2"
-title="J(w) = \frac{1}{2}\sum_i \lambda_i \,d(w,w_i)^2"
-class="math display" /></p>
-<p>This optimization must be performed numerically for <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20n%3E2"
-alt="n&gt;2" title="n&gt;2" class="math inline" />. We employ a version
-of gradient descent, though care should be applied to understand the
-nature of this gradient as a mathematical object. First, let’s notate by
-<img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20M%28q%29"
-alt="M(q)" title="M(q)" class="math inline" /> the Moebius
-transformation that sends <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%200" alt="0"
-title="0" class="math inline" /> to <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20q" alt="q"
-title="q" class="math inline" /> translating along the geodesic segment
-from <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%200" alt="0"
-title="0" class="math inline" /> to <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20q" alt="q"
-title="q" class="math inline" />, which is explicitly</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20M%28q%29%20%3D%20%5Cfrac%7B1%7D%7B%5Csqrt%7B1-%7Cq%7C%5E2%7D%7D%5Cbegin%7Bpmatrix%7D1%20%26%20q%20%5C%5C%5Coverline%7Bq%7D%20%26%201%5Cend%7Bpmatrix%7D"
-alt="M(q) = \frac{1}{\sqrt{1-|q|^2}}\begin{pmatrix}1 &amp; q \\\overline{q} &amp; 1\end{pmatrix}"
-title="M(q) = \frac{1}{\sqrt{1-|q|^2}}\begin{pmatrix}1 &amp; q \\\overline{q} &amp; 1\end{pmatrix}"
-class="math display" /></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><munder><mo>∑</mo><mi>i</mi></munder><msub><mi>λ</mi><mi>i</mi></msub><mspace width="0.167em"></mspace><mi>d</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>w</mi><mo>,</mo><msub><mi>w</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">J(w) = \frac{1}{2}\sum_i \lambda_i \,d(w,w_i)^2</annotation></semantics></math></p>
+<p>This optimization must be performed numerically for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n&gt;2</annotation></semantics></math>.
+We employ a version of gradient descent, though care should be applied
+to understand the nature of this gradient as a mathematical object.
+First, let’s notate by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>q</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">M(q)</annotation></semantics></math>
+the Moebius transformation that sends
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+translating along the geodesic segment from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>,
+which is explicitly</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>q</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><msqrt><mrow><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>q</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup></mrow></msqrt></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd><mtd columnalign="center" style="text-align: center"><mi>q</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mover><mi>q</mi><mo accent="true">¯</mo></mover></mtd><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd></mtr></mtable><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">M(q) = \frac{1}{\sqrt{1-|q|^2}}\begin{pmatrix}1 &amp; q \\\overline{q} &amp; 1\end{pmatrix}</annotation></semantics></math></p>
 <p>This matrix embodies the notion of translating in the direction and
-distance of <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20q" alt="q"
-title="q" class="math inline" /> “in the simplest way possible”,
-considering the difficulty of being unable to compare directions at
-different points.</p>
-<p>We can then define the positions of the vertices relative to <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w" alt="w"
-title="w" class="math inline" /> by performing the inverse
-transformation:</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20r_i%20%3D%20M%28-w%29%20%5Ccdot%20w_i"
-alt="r_i = M(-w) \cdot w_i" title="r_i = M(-w) \cdot w_i"
-class="math display" /></p>
-<p>Of course, <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20d%28r_i%2C0%29%3Dd%28w_i%2Cw%29"
-alt="d(r_i,0)=d(w_i,w)" title="d(r_i,0)=d(w_i,w)"
-class="math inline" />. Then, we can define the “logarithm” of such
-relative position as a complex number with the same phase and norm equal
-to the distance:</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Clog%5Br_i%5D%20%3D%20%5Clog%20%5Cleft%5B%7Cr_i%7Ce%5E%7Bi%5Cphi_i%7D%5Cright%5D%20%3D%20d%28r_i%2C0%29%20e%5E%7Bi%5Cphi_i%7D"
-alt="\log[r_i] = \log \left[|r_i|e^{i\phi_i}\right] = d(r_i,0) e^{i\phi_i}"
-title="\log[r_i] = \log \left[|r_i|e^{i\phi_i}\right] = d(r_i,0) e^{i\phi_i}"
-class="math display" /></p>
+distance of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+“in the simplest way possible”, considering the difficulty of being
+unable to compare directions at different points.</p>
+<p>We can then define the positions of the vertices relative to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+by performing the inverse transformation:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>i</mi></msub><mo>=</mo><mi>M</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>−</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>⋅</mo><msub><mi>w</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">r_i = M(-w) \cdot w_i</annotation></semantics></math></p>
+<p>Of course,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>r</mi><mi>i</mi></msub><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>w</mi><mi>i</mi></msub><mo>,</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d(r_i,0)=d(w_i,w)</annotation></semantics></math>.
+Then, we can define the “logarithm” of such relative position as a
+complex number with the same phase and norm equal to the distance:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mo>log</mo><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow><msup><mi>e</mi><mrow><mi>i</mi><msub><mi>ϕ</mi><mi>i</mi></msub></mrow></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>r</mi><mi>i</mi></msub><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>e</mi><mrow><mi>i</mi><msub><mi>ϕ</mi><mi>i</mi></msub></mrow></msup></mrow><annotation encoding="application/x-tex">\log[r_i] = \log \left[|r_i|e^{i\phi_i}\right] = d(r_i,0) e^{i\phi_i}</annotation></semantics></math></p>
 <p>The logarithm is a tangent vector which belongs to the tangent space
-to <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathbb%7BH%7D%5E2"
-alt="\mathbb{H}^2" title="\mathbb{H}^2" class="math inline" /> at the
-origin, which is just <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathbb%7BC%7D"
-alt="\mathbb{C}" title="\mathbb{C}" class="math inline" />, a vector
-space where weighted averages are well defined. The gradient is
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>ℍ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\mathbb{H}^2</annotation></semantics></math>
+at the origin, which is just
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ℂ</mi><annotation encoding="application/x-tex">\mathbb{C}</annotation></semantics></math>,
+a vector space where weighted averages are well defined. The gradient is
 recognized to be</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cnabla%20J%28w%29%20%3D%20-%20%5Csum_i%20%5Clambda_i%20%5Clog%5Br_i%5D"
-alt="\nabla J(w) = - \sum_i \lambda_i \log[r_i]"
-title="\nabla J(w) = - \sum_i \lambda_i \log[r_i]"
-class="math display" /></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>∇</mi><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>−</mo><munder><mo>∑</mo><mi>i</mi></munder><msub><mi>λ</mi><mi>i</mi></msub><mo>log</mo><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\nabla J(w) = - \sum_i \lambda_i \log[r_i]</annotation></semantics></math></p>
 <p>To perform a gradient descent iteration, we need to properly
-generalize the operation of (small) displacement <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w%20%5Cmapsto%20w%20-%5Cnabla%20J%28w%29"
-alt="w \mapsto w -\nabla J(w)" title="w \mapsto w -\nabla J(w)"
-class="math inline" />. We understand we really need to transform <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w" alt="w"
-title="w" class="math inline" /> by the exponential of the tangent
-vector <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20-%5Cnabla%20J"
-alt="-\nabla J" title="-\nabla J" class="math inline" />. We define the
-“exponential” to invert the “logarithm”:</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cexp%5B%7Cv%7Ce%5E%7Bi%5Cphi%7D%5D%20%3D%20%5Cth%5Cleft%28%5Cfrac%7B%7Cv%7C%7D%7B2%7D%5Cright%29e%5E%7Bi%5Cphi%7D"
-alt="\exp[|v|e^{i\phi}] = \th\left(\frac{|v|}{2}\right)e^{i\phi}"
-title="\exp[|v|e^{i\phi}] = \th\left(\frac{|v|}{2}\right)e^{i\phi}"
-class="math display" /></p>
+generalize the operation of (small) displacement
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>↦</mo><mi>w</mi><mo>−</mo><mi>∇</mi><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">w \mapsto w -\nabla J(w)</annotation></semantics></math>.
+We understand we really need to transform
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+by the exponential of the tangent vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi>∇</mi><mi>J</mi></mrow><annotation encoding="application/x-tex">-\nabla J</annotation></semantics></math>.
+We define the “exponential” to invert the “logarithm”:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>exp</mo><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>v</mi><mo stretchy="true" form="postfix">|</mo></mrow><msup><mi>e</mi><mrow><mi>i</mi><mi>ϕ</mi></mrow></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mo>tanh</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mo stretchy="true" form="prefix">|</mo><mi>v</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>e</mi><mrow><mi>i</mi><mi>ϕ</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\exp[|v|e^{i\phi}] = \tanh\left(\frac{|v|}{2}\right)e^{i\phi}</annotation></semantics></math></p>
 <p>And finally the iteration step is as follows:</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20w%20%5Cmapsto%20M%28%5Cexp%5B-%5Cnabla%20J%28w%29%5D%29%20%5Ccdot%20w"
-alt="w \mapsto M(\exp[-\nabla J(w)]) \cdot w"
-title="w \mapsto M(\exp[-\nabla J(w)]) \cdot w"
-class="math display" /></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>↦</mo><mi>M</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>exp</mo><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mi>∇</mi><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo>⋅</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">w \mapsto M(\exp[-\nabla J(w)]) \cdot w</annotation></semantics></math></p>
 <p>We employ the following algorithm with linear convergence, described
 directly in the Poincaré disk for convenience:</p>
 <ul>
-<li>Set <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w" alt="w"
-title="w" class="math inline" /> to a first guess, e.g. <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Csum_i%20%5Clambda_i%20w_i"
-alt="\sum_i \lambda_i w_i" title="\sum_i \lambda_i w_i"
-class="math inline" />.</li>
+<li>Set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+to a first guess,
+e.g. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>i</mi></msub><msub><mi>λ</mi><mi>i</mi></msub><msub><mi>w</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\sum_i \lambda_i w_i</annotation></semantics></math>.</li>
 <li>Start loop:</li>
 <li><ul>
-<li>Find vertices relative to <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w" alt="w"
-title="w" class="math inline" /> as <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20r_i%20%3D%20M%28-w%29%5Ccdot%20w_i"
-alt="r_i = M(-w)\cdot w_i" title="r_i = M(-w)\cdot w_i"
-class="math inline" />.</li>
+<li>Find vertices relative to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>i</mi></msub><mo>=</mo><mi>M</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>−</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>⋅</mo><msub><mi>w</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">r_i = M(-w)\cdot w_i</annotation></semantics></math>.</li>
 </ul></li>
 <li><ul>
-<li>Compute gradient as <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cnabla%20J%28w%29%20%3D%20-%20%5Csum_i%20%5Clambda_i%20%5Clog%5Br_i%5D"
-alt="\nabla J(w) = - \sum_i \lambda_i \log[r_i]"
-title="\nabla J(w) = - \sum_i \lambda_i \log[r_i]"
-class="math inline" /></li>
+<li>Compute gradient as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>∇</mi><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>−</mo><msub><mo>∑</mo><mi>i</mi></msub><msub><mi>λ</mi><mi>i</mi></msub><mo>log</mo><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\nabla J(w) = - \sum_i \lambda_i \log[r_i]</annotation></semantics></math></li>
 </ul></li>
 <li><ul>
-<li>Compute <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20u%20%3D%20%5Cexp%5B-%5Cnabla%20J%5D"
-alt="u = \exp[-\nabla J]" title="u = \exp[-\nabla J]"
-class="math inline" />. This is the next step position, but relative to
-current <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w" alt="w"
-title="w" class="math inline" />.</li>
+<li>Compute
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mo>exp</mo><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mi>∇</mi><mi>J</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">u = \exp[-\nabla J]</annotation></semantics></math>.
+This is the next step position, but relative to current
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>.</li>
 </ul></li>
 <li><ul>
-<li>Translate <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w" alt="w"
-title="w" class="math inline" /> by <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20u" alt="u"
-title="u" class="math inline" /> through <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w%20%5Cmapsto%20M%28u%29%20w"
-alt="w \mapsto M(u) w" title="w \mapsto M(u) w"
-class="math inline" /></li>
+<li>Translate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>
+through
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>↦</mo><mi>M</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>u</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w \mapsto M(u) w</annotation></semantics></math></li>
 </ul></li>
 <li><ul>
-<li>If <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%7Cu%7C%3C%5Cepsilon"
-alt="|u|&lt;\epsilon" title="|u|&lt;\epsilon" class="math inline" />,
-break and return <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w" alt="w"
-title="w" class="math inline" /> as <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Coverline%20w"
-alt="\overline w" title="\overline w" class="math inline" />.</li>
+<li>If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>u</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>&lt;</mo><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">|u|&lt;\epsilon</annotation></semantics></math>,
+break and return
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>w</mi><mo accent="true">¯</mo></mover><annotation encoding="application/x-tex">\overline w</annotation></semantics></math>.</li>
 </ul></li>
 </ul>
 <h1 id="color-harmony">Color Harmony</h1>
@@ -665,13 +505,11 @@ determine which pairs of colors are harmonic complementaries. If we draw
 the segments between them, they <em>roughly</em> appear to be passing
 through a single point:</p>
 <p><img src="assets/complementarity_data.png" /></p>
-<p>This harmonic center, which I’ve fixed at <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20w%3D0.25%20%2B%200.1i"
-alt="w=0.25 + 0.1i" title="w=0.25 + 0.1i" class="math display" /> is a
-decidedly orange-ish chromaticity which happens to be, roughly, that of
-human skin (of various ethnicities). It looks like this at various
-lumas</p>
+<p>This harmonic center, which I’ve fixed at
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>=</mo><mn>0.25</mn><mo>+</mo><mn>0.1</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">w=0.25 + 0.1i</annotation></semantics></math>
+is a decidedly orange-ish chromaticity which happens to be, roughly,
+that of human skin (of various ethnicities). It looks like this at
+various lumas</p>
 <p><img src="assets/skincenter.png" /></p>
 <p>The significance of a match with skin tones is probably a rabbit hole
 best left for spare afternoons. Still, we can term this the skin center,
@@ -961,17 +799,13 @@ case, for example for r and t.</p>
 <h2 id="models-of-the-hyperbolic-plane">Models of the Hyperbolic
 plane</h2>
 <h3 id="poincaré-disk">Poincaré Disk</h3>
-<p>Parametrized by complex <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w" alt="w"
-title="w" class="math inline" /> in the unit disk <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%7Cw%7C%3C1"
-alt="|w|&lt;1" title="|w|&lt;1" class="math inline" />. This is a
-conformal model. The conformal boundary <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%7Cw%7C%3D1"
-alt="|w|=1" title="|w|=1" class="math inline" /> is composed of all
-ideal points.</p>
+<p>Parametrized by complex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+in the unit disk
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>w</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|w|&lt;1</annotation></semantics></math>.
+This is a conformal model. The conformal boundary
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>w</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|w|=1</annotation></semantics></math>
+is composed of all ideal points.</p>
 <p>The representation of geometric objects are as such: - Lines:
 generalized circular arcs which meet the boundary at right angles. -
 Circles: Euclidean circles contained entirely within the disk. -
@@ -980,119 +814,65 @@ generalized circular arcs that meet the boundary at non-right
 angles.</p>
 <p>Angles are accurately represented.</p>
 <p>The metric is</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20ds%5E2%20%3D%20%5Cfrac%7B4%7Cdw%7C%5E2%7D%7B%281-%7Cw%7C%5E2%29%5E2%7D"
-alt="ds^2 = \frac{4|dw|^2}{(1-|w|^2)^2}"
-title="ds^2 = \frac{4|dw|^2}{(1-|w|^2)^2}" class="math inline" /></p>
-<p>Isometries are given by Moebius transformations in <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20PSU%281%2C1%29"
-alt="PSU(1,1)" title="PSU(1,1)" class="math inline" />, so of the
-form</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cbegin%7Bbmatrix%7D%20u%20%26%20v%20%5C%5C%20%5Coverline%7Bv%7D%20%26%20%5Coverline%7Bu%7D%20%5Cend%7Bbmatrix%7D"
-alt="\begin{bmatrix} u &amp; v \\ \overline{v} &amp; \overline{u} \end{bmatrix}"
-title="\begin{bmatrix} u &amp; v \\ \overline{v} &amp; \overline{u} \end{bmatrix}"
-class="math display" /></p>
-<p>where <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%7Cu%7C%5E2-%7Cv%7C%5E2%20%3D%201"
-alt="|u|^2-|v|^2 = 1" title="|u|^2-|v|^2 = 1" class="math inline" />.
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><msup><mi>s</mi><mn>2</mn></msup><mo>=</mo><mfrac><mrow><mn>4</mn><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>d</mi><mi>w</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>w</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mfrac></mrow><annotation encoding="application/x-tex">ds^2 = \frac{4|dw|^2}{(1-|w|^2)^2}</annotation></semantics></math></p>
+<p>Isometries are given by Moebius transformations in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>S</mi><mi>U</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">PSU(1,1)</annotation></semantics></math>,
+so of the form</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mi>u</mi></mtd><mtd columnalign="center" style="text-align: center"><mi>v</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mover><mi>v</mi><mo accent="true">¯</mo></mover></mtd><mtd columnalign="center" style="text-align: center"><mover><mi>u</mi><mo accent="true">¯</mo></mover></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\begin{bmatrix} u &amp; v \\ \overline{v} &amp; \overline{u} \end{bmatrix}</annotation></semantics></math></p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>u</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>v</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|u|^2-|v|^2 = 1</annotation></semantics></math>.
 This is actually a double cover, so it’s necessary to quotient by the
-centre <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5C%7B-1%2C1%5C%7D"
-alt="\{-1,1\}" title="\{-1,1\}" class="math inline" />. It can
-equivalently be described as the unit split-quaternion <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20q%20%3D%20u%20%2B%20v%20j"
-alt="q = u + v j" title="q = u + v j" class="math inline" /> where <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20i%5E2%20%3D%20-1"
-alt="i^2 = -1" title="i^2 = -1" class="math inline" />, <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20j%5E2%3D1"
-alt="j^2=1" title="j^2=1" class="math inline" />, <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20ij%20%3D%20-ji"
-alt="ij = -ji" title="ij = -ji" class="math inline" />, and the
-split-quaternion norm is <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N%28q%29%20%3D%20%7Cu%7C%5E2-%7Cv%7C%5E2"
-alt="N(q) = |u|^2-|v|^2" title="N(q) = |u|^2-|v|^2"
-class="math inline" />.</p>
+centre
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mo>−</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{-1,1\}</annotation></semantics></math>.
+It can equivalently be described as the unit split-quaternion
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mo>=</mo><mi>u</mi><mo>+</mo><mi>v</mi><mi>j</mi></mrow><annotation encoding="application/x-tex">q = u + v j</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>i</mi><mn>2</mn></msup><mo>=</mo><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i^2 = -1</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>j</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">j^2=1</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mi>j</mi><mo>=</mo><mo>−</mo><mi>j</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">ij = -ji</annotation></semantics></math>,
+and the split-quaternion norm is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>q</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>u</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>v</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">N(q) = |u|^2-|v|^2</annotation></semantics></math>.</p>
 <h3 id="poincaré-half-plane">Poincaré Half-Plane</h3>
-<p>Parametrized by complex <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20z%20%3D%20x%2Biy"
-alt="z = x+iy" title="z = x+iy" class="math inline" /> with <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20y%20%3D%20%5CIm%7Bz%7D%20%3E%200"
-alt="y = \Im{z} &gt; 0" title="y = \Im{z} &gt; 0"
-class="math inline" />. This is a conformal model. The conformal
-boundary is given by the real axis <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5CIm%7Bz%7D%20%3D%200"
-alt="\Im{z} = 0" title="\Im{z} = 0" class="math inline" /> compactified
-with the one point <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20z%3D%5Cinfty"
-alt="z=\infty" title="z=\infty" class="math inline" />.</p>
+<p>Parametrized by complex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mi>x</mi><mo>+</mo><mi>i</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">z = x+iy</annotation></semantics></math>
+with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>ℑ</mi><mi>z</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">y = \Im{z} &gt; 0</annotation></semantics></math>.
+This is a conformal model. The conformal boundary is given by the real
+axis
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ℑ</mi><mi>z</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Im{z} = 0</annotation></semantics></math>
+compactified with the one point
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">z=\infty</annotation></semantics></math>.</p>
 <p>The representation of geometric objects are as such: - Lines:
 generalized circular arcs which meet the boundary at right angles.
-(Including vertical lines which are understood to meet <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20z%3D%5Cinfty"
-alt="z=\infty" title="z=\infty" class="math inline" /> at 90°) -
-Circles: Euclidean circles contained entirely within the disk. -
-Horocycles: Euclidean circles tangent to the boundary. (Including
+(Including vertical lines which are understood to meet
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">z=\infty</annotation></semantics></math>
+at 90°) - Circles: Euclidean circles contained entirely within the disk.
+- Horocycles: Euclidean circles tangent to the boundary. (Including
 horizontal lines) - Hypercycles: generalized circular arcs that meet the
 boundary at non-right angles. (Including any lines not horizontal nor
 vertical)</p>
 <p>The metric is</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20ds%5E2%20%3D%20%5Cfrac%7B%7Cdz%7C%5E2%7D%7B%28%5CIm%20z%29%5E2%7D%20%3D%20%5Cfrac%7Bdx%5E2%2Bdy%5E2%7D%7By%5E2%7D"
-alt="ds^2 = \frac{|dz|^2}{(\Im z)^2} = \frac{dx^2+dy^2}{y^2}"
-title="ds^2 = \frac{|dz|^2}{(\Im z)^2} = \frac{dx^2+dy^2}{y^2}"
-class="math display" /></p>
-<p>Isometries are given by real Moebius transformations in <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20PSL%282%2C%5Cmathbb%7BR%7D%29"
-alt="PSL(2,\mathbb{R})" title="PSL(2,\mathbb{R})"
-class="math inline" />, so of the form</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20%26%20d%20%5Cend%7Bbmatrix%7D"
-alt="\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}"
-title="\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}"
-class="math display" /></p>
-<p>where <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20a%2Cb%2Cc%2Cd"
-alt="a,b,c,d" title="a,b,c,d" class="math inline" /> are real and <img
-style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20ad-bc%3D1"
-alt="ad-bc=1" title="ad-bc=1" class="math inline" />, again with
-quotient of the overall sign.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><msup><mi>s</mi><mn>2</mn></msup><mo>=</mo><mfrac><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>d</mi><mi>z</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>ℑ</mi><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>d</mi><msup><mi>y</mi><mn>2</mn></msup></mrow><msup><mi>y</mi><mn>2</mn></msup></mfrac></mrow><annotation encoding="application/x-tex">ds^2 = \frac{|dz|^2}{(\Im z)^2} = \frac{dx^2+dy^2}{y^2}</annotation></semantics></math></p>
+<p>Isometries are given by real Moebius transformations in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>S</mi><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>,</mo><mi>ℝ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">PSL(2,\mathbb{R})</annotation></semantics></math>,
+so of the form</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mi>a</mi></mtd><mtd columnalign="center" style="text-align: center"><mi>b</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>c</mi></mtd><mtd columnalign="center" style="text-align: center"><mi>d</mi></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}</annotation></semantics></math></p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>d</mi></mrow><annotation encoding="application/x-tex">a,b,c,d</annotation></semantics></math>
+are real and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>d</mi><mo>−</mo><mi>b</mi><mi>c</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">ad-bc=1</annotation></semantics></math>,
+again with quotient of the overall sign.</p>
 <h3 id="conversions">Conversions</h3>
 <h4 id="equidistand-azimuthal-and-poincaré-disk">Equidistand Azimuthal
 and Poincaré Disk</h4>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Crho%20%3D%202%20%5Ctanh%5E%7B-1%7D%7Cw%7C"
-alt="\rho = 2 \tanh^{-1}|w|" title="\rho = 2 \tanh^{-1}|w|"
-class="math display" /></p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20w%20%3D%20%5Ctanh%28%5Crho%2F2%29%20e%5E%7Bi%5Ctheta%7D"
-alt="w = \tanh(\rho/2) e^{i\theta}"
-title="w = \tanh(\rho/2) e^{i\theta}" class="math display" /></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mn>2</mn><msup><mo>tanh</mo><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>w</mi><mo stretchy="true" form="postfix">|</mo></mrow></mrow><annotation encoding="application/x-tex">\rho = 2 \tanh^{-1}|w|</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>=</mo><mo>tanh</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>ρ</mi><mi>/</mi><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>e</mi><mrow><mi>i</mi><mi>θ</mi></mrow></msup></mrow><annotation encoding="application/x-tex">w = \tanh(\rho/2) e^{i\theta}</annotation></semantics></math></p>
 <h4 id="poincaré-disk-and-half-plane">Poincaré Disk and Half-Plane</h4>
 <p>Also known as the Riemann Sphere’s Cayley transform.</p>
-<p>This is assuming the convention of <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w%20%3D%201%20%5Crightarrow%20z%20%3D%20%5Cinfty"
-alt="w = 1 \rightarrow z = \infty" title="w = 1 \rightarrow z = \infty"
-class="math inline" />, <img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20w%20%3D%20-1%20%5Crightarrow%20z%20%3D%200"
-alt="w = -1 \rightarrow z = 0" title="w = -1 \rightarrow z = 0"
-class="math inline" />.</p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20z%20%3D%20-i%20%5Cfrac%7Bw%2B1%7D%7Bw-1%7D"
-alt="z = -i \frac{w+1}{w-1}" title="z = -i \frac{w+1}{w-1}"
-class="math display" /></p>
-<p><img style="vertical-align:middle"
-src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20w%20%3D%20%5Cfrac%7Bz-i%7D%7Bz%2Bi%7D"
-alt="w = \frac{z-i}{z+i}" title="w = \frac{z-i}{z+i}"
-class="math display" /></p>
+<p>This is assuming the convention of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>=</mo><mn>1</mn><mo>→</mo><mi>z</mi><mo>=</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">w = 1 \rightarrow z = \infty</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>=</mo><mo>−</mo><mn>1</mn><mo>→</mo><mi>z</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">w = -1 \rightarrow z = 0</annotation></semantics></math>.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mo>−</mo><mi>i</mi><mfrac><mrow><mi>w</mi><mo>+</mo><mn>1</mn></mrow><mrow><mi>w</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex"> z = -i \frac{w+1}{w-1} </annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>=</mo><mfrac><mrow><mi>z</mi><mo>−</mo><mi>i</mi></mrow><mrow><mi>z</mi><mo>+</mo><mi>i</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">w = \frac{z-i}{z+i}</annotation></semantics></math></p>
 </body>
 </html>

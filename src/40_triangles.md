@@ -41,7 +41,7 @@ $$\nabla J(w) = - \sum_i \lambda_i \log[r_i]$$
 
 To perform a gradient descent iteration, we need to properly generalize the operation of (small) displacement $w \mapsto w -\nabla J(w)$. We understand we really need to transform $w$ by the exponential of the tangent vector $-\nabla J$. We define the "exponential" to invert the "logarithm":
 
-$$\exp[|v|e^{i\phi}] = \th\left(\frac{|v|}{2}\right)e^{i\phi}$$
+$$\exp[|v|e^{i\phi}] = \tanh\left(\frac{|v|}{2}\right)e^{i\phi}$$
 
 And finally the iteration step is as follows:
 
