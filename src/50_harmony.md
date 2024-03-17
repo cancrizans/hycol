@@ -81,7 +81,7 @@ These are forces in opposition: clearly complementary colors have the greatest c
 Working only with resonants is quite boring and static; some variation in relationship between the hues can expand the emotional range of a piece. While the contrast is lesser, an interval of 5 steps is also quite pleasant, and it could be called a **semi-resonant**. Here is all the possible intervals, sorted by increasing dissonance, with my interpretation:
 
 |N | Interval | Quality | Left | Right|
-|---|---|---|---|
+|---|---|---|---|---|
 |0 | Unison | Complex (see below) | <i class="ctile-13"></i> <i class="ctile-13"></i>|
 |6 | Resonant | Mutual emphasis: maximum contrast without complementarity |   <i class="ctile-13"></i> <i class="ctile-5"></i> |   <i class="ctile-13"></i> <i class="ctile-7"></i> |
 |5 | Semi-resonant | Similar to resonant, but with lesser contrast |   <i class="ctile-13"></i> <i class="ctile-4"></i> |   <i class="ctile-13"></i> <i class="ctile-8"></i> |
@@ -91,7 +91,7 @@ Working only with resonants is quite boring and static; some variation in relati
 |1 | Minor Analogous | Dissonant: complementary of resonant |   <i class="ctile-13"></i> <i class="ctile-0"></i> |   <i class="ctile-13"></i> <i class="ctile-12"></i> |
 |7 | Complementary | Highly displeasing | <i class="ctile-13"></i> <i class="ctile-6"></i> |
 
-![](assets/combinatoric_modes.png)
+
 
 ### Axial complementarity
 
@@ -131,6 +131,34 @@ The tonnetz also places at maximum distance colors which are complementaries or 
 
 *wip*
 
+
 ## Polytriadic Structure
 
 *wip*
+
+## Combinatoric Modes and Non-functional Approach
+
+As an alternative to working with triads, there is potential for an eclectic and simpler color picking system in which tones are selected exclusively to avoid dissonance but with no semantic intentionality. This coloring style is potentially well suited for comics and illustration, and it provides large and rich non-offending palettes, though color does tend to be employed in a more literal sense, losing its emotional charge.
+
+This, in my opinion, mirrors non-functional harmony in music: colors do not have a color-theoretic function, but are simply meaningless expressive units that the artist can assemble freely.
+
+In a non-functional palette, blending fields should be avoided altogether, preferring instead to pick colors from a discrete set of hues, in turn chosen to prevent dissonance. Generally, one chooses from the set the hue that best approximates the intended color (typically literal: trees are green, sky is blue etc.).
+
+The 14-tone system allows a maximum of 7 colors without complementaries amongst themselves. There is a total of 128 of these maximal sets, but up to rotations there are only 10 distinct possibilities, which we term combinatoric modes:
+
+![](assets/combinatoric_modes.png)
+
+Note that modes I and II are chiral and are mirror images of eachother, all other modes are symmetric with respect to an axis. Mode VIII is simply the resonant cycle of a given parity, as seen before.
+
+Mode III and VII might be excluded on the ground of being severely unbalanced.
+
+Past that, the choice of mode is informed primarily by which secondary dissonance, after complementaries, is deemed more problematic: the minor analogous or the mediant. Mode VIII for example has no minor analogies but many mediants. Mode X is particularly nice, with only two minor analogies and only one mediant.
+
+Let's try to build a palette in mode X just as an example. Let's say that the point in the bottom left through the axis of symmetry is <i class='ctile-10'>l</i> - we rotate the mode X schema over the color wheel and then pick hues accordingly: going counter-clockwise, after l we skip two places, then pick r, then skip one place, then pick o, and so on, to obtain:
+
+<i class='ctile-10'>l</i> <i class='ctile-13'>r</i> <i class='ctile-1'>c</i> <i class='ctile-2'>o</i> <i class='ctile-4'>y</i> <i class='ctile-5'>x</i> <i class='ctile-7'>t</i>
+
+This palette is "safe to pick", with the right caveats:
+
+- Low-saturation (with saturation as in the skin frame!) colors should be limited, as is having too many colors for the same tone.
+- The use of the tones should be "atonal" in the sense that the artist should strive specifically to avoid explicit functional relationships that might undermine the intention of the piece. We do not want to accidentally be using any tone as a triadic key, for example.

@@ -17,6 +17,9 @@ body {
   max-width: 50em;
   background: #fefefe; }
 
+img {
+  max-width: 100%; }
+
 .ctile, .ctile-0, .ctile-1, .ctile-2, .ctile-3, .ctile-4, .ctile-5, .ctile-6, .ctile-7, .ctile-8, .ctile-9, .ctile-10, .ctile-11, .ctile-12, .ctile-13 {
   width: 30px;
   height: 30px;
