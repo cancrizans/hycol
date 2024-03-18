@@ -283,14 +283,39 @@ axis are just simply shifts in temperature.</p>
 <p>Then isotherms must meet the thermal axis at right angle, and their
 temperature is that of the point of intersection. If they are
 sufficiently symmetric, so curves of constant curvature, then they are a
-pencil of generalized circles orthogonal to the thermal axis; namely,
-they could be any of these:</p>
+pencil of generalized circles orthogonal to the thermal axis.</p>
+<p>The first observation to make is that the isotherms do indeed curve,
+with the concavity oriented towards warmth. This is manifested in the
+fact that the temperature variation with hue is much larger for warm
+hues, i.e. vermillion is clearly warmer than neighbouring tones, while
+cold hues tend to have a very subdued variation, with greens, teals,
+blues and even purples having roughly comparable temperature. The second
+piece of evidence is the expectation that classical (Planck-locus based)
+isotherms in the CIEXYZ model are expected to intersect somewhere in the
+magentas – hyperbolic lines perpendicular to the thermal axis could not
+possibly converge, so there must be curvature.</p>
+<p>If isotherm curvature is present towards warmth, then depending on
+its value we have three distinct geometrical cases:</p>
 <ul>
-<li>Straight lines</li>
-<li>Hypercycles</li>
+<li>If curvature &lt; 1, the isotherms are hypercycles (aka equidistant
+curves) and they do eventually diverge.</li>
+<li>If curvature = 1, matching precisely the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>ℍ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\mathbb{H}^2</annotation></semantics></math>
+curvature, the isotherms are horocycles, which are infinite curves that
+all meet at one point at infinity on the thermal axis, the <strong>ideal
+warm point</strong>.</li>
+<li>If curvature &gt; 1, then the isotherms are circles with a common
+center. This center is a point on the thermal axis warmer than
+vermillion and way out of the physical gamut.</li>
 </ul>
-<p><em>wip</em></p>
+<p>I find that the limiting horocyclical case is as good a match with
+observations than the other two possibilities, and is more parsimonious
+as it eliminates the parameter of the isotherm curvature. Let’s
+therefore assume the horocyclical model for temperature.</p>
+<p>Here are the isotherms at different luminances, depicted as
+horizontal strips. The horizontal metric is accurate.</p>
 <p><img src="assets/isotherm_strips.png" /></p>
+<p>The</p>
 <h1 id="triangular-blending-and-fields">Triangular Blending and
 Fields</h1>
 <p><em>wip: rewrite for pandoc markdown</em></p>
@@ -530,9 +555,12 @@ alignment is correct.</p>
 as expected, the gradient passes through the skin center, and
 consequently, the pairing is unpleasant in character.</p>
 <p><img src="assets/geograd_comp.png" /></p>
+<p>In a way, complementary pairs “cancel out” and blend into nothing,
+assuming we understand human skin as a default non-statement.</p>
 <p>Instead, if we shift one of the colors slightly, the geodesic segment
-misses the skin center and the pairing improves considerably in
-appeal:</p>
+misses the skin center and the pairing improves considerably in appeal,
+as their geodesic blend acquires a very slight greenish-yellowish tint
+from skin tone:</p>
 <p><img src="assets/geograd_reso.png" /></p>
 <p>We will see shortly that such “near misses” are indeed what we should
 strategically target to employ colors in an aesthetically pleasing
@@ -640,7 +668,32 @@ far as possible from o and c. This is convenient for digital art as it
 allows the use of full black and white while minimizing the risk of
 clashing with intermediate tones, if o and c are preferred.</p>
 <h3 id="categorical-warp">Categorical Warp</h3>
-<p><em>wip</em></p>
+<p><img src="assets/toneslices.png" /></p>
+<p>Categorical warp is a subtle but important effect in the skin frame
+which rests on the mismatch between literal, semantic color categories
+and hue-saturation as defined in a particular frame. It is important for
+an artist to be able to see colors in terms of their harmonic,
+<em>functional</em> properties, instead.</p>
+<p>Semantic categories, which are usually defined in term of opponent
+process theory (i.e. blue <em>against</em> yellow, etc), break down when
+the saturation is lowered, as they get “warped” by the shifted reference
+frame in which we’re working. The categorical warp is maximum for the
+pink-chartreuse axis, so let’s imagine as an example that one wants to
+produce a desaturated yellow-green.</p>
+<p>Instict would dictate one attempts to find a shade of greenish and
+slightly yellowish grey that would be categorized, in common parlance,
+as “chartreuse, but less intense”. This is however incorrect in a
+functional sense, as the less intense color of the same hue as intense
+chartreuse is in fact much more yellow-orange. Since our perception
+adapts extremely well to the skin background, the effect is almost
+invisible in the diagram above, but actually picking the coloured tiles
+will reveal the very significant mismatch.</p>
+<p>A slightly different, but related form of categorical mismatch occurs
+with primary blue (β),which is sharply located in the lavender (l) hues
+in the skin frame, but appears to be distinctly more blue than that,
+almost blue-violet. This is entirely due to categorical warp according
+to primary blue’s excessive saturation compared to neighbouring lavender
+tones; functionally, it will still act like a lavender.</p>
 <h2 id="tone-intervals">14-Tone Intervals</h2>
 <p>Harmonic coloring is based on two principles:</p>
 <ol type="1">

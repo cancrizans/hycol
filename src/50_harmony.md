@@ -76,7 +76,15 @@ Observe that D65 greys, including full black and full white, are exactly halfway
 
 ### Categorical Warp
 
-*wip*
+![](assets/toneslices.png)
+
+Categorical warp is a subtle but important effect in the skin frame which rests on the mismatch between literal, semantic color categories and hue-saturation as defined in a particular frame. It is important for an artist to be able to see colors in terms of their harmonic, *functional* properties, instead.
+
+Semantic categories, which are usually defined in term of opponent process theory (i.e. blue *against* yellow, etc), break down when the saturation is lowered, as they get "warped" by the shifted reference frame in which we're working. The categorical warp is maximum for the pink-chartreuse axis, so let's imagine as an example that one wants to produce a desaturated yellow-green.
+
+Instict would dictate one attempts to find a shade of greenish and slightly yellowish grey that would be categorized, in common parlance, as "chartreuse, but less intense". This is however incorrect in a functional sense, as the less intense color of the same hue as intense chartreuse is in fact much more yellow-orange. Since our perception adapts extremely well to the skin background, the effect is almost invisible in the diagram above, but actually picking the coloured tiles will reveal the very significant mismatch.
+
+A slightly different, but related form of categorical mismatch occurs with primary blue (β),which is sharply located in the lavender (l) hues in the skin frame, but appears to be distinctly more blue than that, almost blue-violet. This is entirely due to categorical warp according to primary blue's excessive saturation compared to neighbouring lavender tones; functionally, it will still act like a lavender. 
 
 ## 14-Tone Intervals
 
