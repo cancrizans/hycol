@@ -56,16 +56,16 @@ For the skin frame hues in the 14-tone system I've chosen the following naming c
 |<i class="ctile-0">v</i>| Vermillion | Warm, orange-ish red|
 |<i class="ctile-1">c</i>| Carrot | Reddish orange|
 |<i class="ctile-2">o</i>| Orange | Orange fruit, cold orange |
-|<i class="ctile-3">h</i>| Honey | Warm, orange-ish yellow|
+|<i class="ctile-3">h</i>| Honey | Warm, orange-ish yellow, gold|
 |<i class="ctile-4">y</i>| Yellow | Lemon, cold yellow|
 |<i class="ctile-5">x</i>| Chartreuse | Pear, yellow-green|
-|<i class="ctile-6">g</i>| Green | Slightly cold green |
-|<i class="ctile-7">t</i>| Teal | Bluish green |
+|<i class="ctile-6">g</i>| Green | Slightly cold green, forest green |
+|<i class="ctile-7">t</i>| Teal | Bluish green, aquamarine, turquoise |
 |<i class="ctile-8">n</i>| Noon | Noon sky, greenish blue|
-|<i class="ctile-9">b</i>| Blue | Late afternoon sky |
-|<i class="ctile-10">l</i>| Lavender | Bluish violet|
+|<i class="ctile-9">b</i>| Blue | Late afternoon sky, sea blue |
+|<i class="ctile-10">l</i>| Lavender | Bluish violet, dark intense blues, cobalt blue, sRGB primary blue |
 |<i class="ctile-11">m</i>| Magenta | Cold pinks |
-|<i class="ctile-12">p</i>| Pink | Bordeaux, warm pinks, violet-ish red |
+|<i class="ctile-12">p</i>| Pink | Bordeaux, warm pinks, violet-ish red, burgundy |
 |<i class="ctile-13">r</i>| Red | Blood red |
 
 The diagram below depicts the extents of the sRGB gamut in the skin frame with marked hue spokes, and the max-saturation colors of each hue. (For this guide we will use more subdued representative tones since the wild fluctuations in luma and saturation on the gamut boundary can be confusing). Also marked, with greek letters, the RGB primaries and secundaries, displaying misalignment with the new categories (e.g., primary red is decidedly warm).
