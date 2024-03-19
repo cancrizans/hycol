@@ -135,7 +135,7 @@ distinct from an LCD screen.</p>
 darker luminances (an already bright color is brightened less). Its
 dependence on hue is very complicated and the subject of several
 studies, but generally it’s accepted that it’s always positive -
-saturation can never make a color look brighter than it objectively is,
+saturation can never make a color look darker than it objectively is,
 and that it’s most intense on blues, rather intense on magentas all the
 way to reds, and has a narrow dip in strength around yellow, being
 mostly non-existent for yellow hues.</p>
@@ -312,10 +312,11 @@ vermillion and way out of the physical gamut.</li>
 observations than the other two possibilities, and is more parsimonious
 as it eliminates the parameter of the isotherm curvature. Let’s
 therefore assume the horocyclical model for temperature.</p>
+<p><em>wip</em></p>
 <p>Here are the isotherms at different luminances, depicted as
 horizontal strips. The horizontal metric is accurate.</p>
 <p><img src="assets/isotherm_strips.png" /></p>
-<p>The</p>
+<p><em>wip</em></p>
 <h1 id="triangular-blending-and-fields">Triangular Blending and
 Fields</h1>
 <p><em>wip: rewrite for pandoc markdown</em></p>
@@ -865,8 +866,75 @@ inverted path r -&gt; x -&gt; v -&gt; g. The complexity and ambiguity of
 the relationship is too much for intuitive comprehension, which
 contrasts with the immediacy, for example, of the resonance between r
 and t.</p>
+<p>The tonnetz is actually a finite structure, periodic in two
+directions. It is in fact a torus, tessellated into 28 triangles (the
+narrow triads) and with the 14 tones as vertices. It can be in fact
+visualized as a geometric torus:</p>
+<p><img src="assets/tonnetz_torus.png" /></p>
+<p>Or see also <a
+href="https://cancrizans.github.io/hycol_tool/torus">as an interactive
+3d model</a>.</p>
 <h3 id="value">Value</h3>
 <p><em>wip</em></p>
+<h3 id="triadic-painting">Triadic Painting</h3>
+<p>Here’s a rough practical tutorial on how to lay out a palette for a
+simple piece in a single narrow triad.</p>
+<p>Open the HYCOL tool <a
+href="https://cancrizans.github.io/hycol_tool/">here</a>. Disable all
+displays except for the hue wheel, and ensure the number of hue
+divisions is set at 14. Select the SKN whitepoint to center the view on
+the skin tone.</p>
+<p>We now select a key tone; honey is a good choice. There are two
+possible triads with h as the key: h/b/p and h/m/n (we can see this from
+the tonnetz or directly from the color wheel). Let’s go with h/b/p. The
+resonant is blue, which we remind is a vaguely purplish, late-afternoon
+sky class of blues, while the semi-resonant pink is
+bordeauxs/violet-reds/burgundies.</p>
+<p>Going back to the interface, we add poles until we have three, then
+we start color picking them. Looking at the 3d view from above, I line
+up the colors with the corresponding hue lines:</p>
+<p><img src="assets/tooltut_0.png" /></p>
+<p>I’ve chosen very saturated tones for all three, and a rich dark
+burgundy for pink (if it seems strange, remember categorical shift!).
+The saturations and values are up to you; harmony only depends on the
+correct alignment in hue. However, you should try to avoid too
+desaturated tones, or very low separation in values. I check the values
+by rotating into side view, and choosing display value levels:</p>
+<p><img src="assets/tooltut_1.png" /></p>
+<p>The value range is decent for a soft piece. (If we want to use darker
+values, we might want to add a scotopic tail, but for now we’ll keep it
+simple.) In this case, the key is the lightest pole, which is usually
+pretty easy to work with, but it’s not mandatory. The key will be
+emphasized nevertheless by the harmonic information.</p>
+<p>In the tool, I create a field, and select poles 0, 1, 2. The
+following palette is produced by geodesic interpolation of the three
+poles:</p>
+<p><img src="assets/tooltut_2.png" /></p>
+<p>Of course, I can still modify the poles and the field will be updated
+accordingly. Now as a first approximation, I can basically use any color
+from this triangle anywhere in the piece and it should look ok, but a
+better result can be obtained by employing the structure
+<em>functionally</em>. The first note I would make is to mark out the
+rough region of colors, shaded in red, that are close enough to the
+complementarity axis of the key to be potentially muddy. This region of
+the triad is not forbidden, but you want to resist the temptation to
+linger too much on it if barely. For example, when interpolating from
+the burgundy to the blue pole, you might wanna “speed up” halfway
+through to skip the dissonant peak.</p>
+<p><img src="assets/tooltut_3.png" /></p>
+<p>In general, you want to bias your palette use towards the edges of
+the field. In addition, you can divide your image into “background”
+(context) and “foreground” (subject), and for the background only use
+the base from burgundy to blue, without mixing in the key. For the
+foreground you deploy the key, but you can use the entire palette
+really, interleaving colors from the three ramps (and from inside the
+field as well) to create an interesting and multidimensional
+texture.</p>
+<p>Note that this automatically gives us a value range hierarchy between
+background and foreground, since the former is limited in the range of
+values between the p and b poles, while the latter can go all the way
+from p to h (the fact that the geodesic interpolation is interpolating
+the luma at the same rate as the chroma is what guarantees this).</p>
 <h2 id="polytriadic-structure">Polytriadic Structure</h2>
 <p><em>wip</em></p>
 <h2 id="combinatoric-modes-and-non-functional-approach">Combinatoric

@@ -146,10 +146,45 @@ For example, y is the bottom vertex of the narrow triad y/b/p, with y as the key
 
 The tonnetz also places at maximum distance colors which are complementaries or mediants, providing a further rationalization of why they're perceived as displeasing -- they are "distant" in terms of the number of resonant steps that must be taken to bring one to the other. In this picture (which is to be understood as more poetic than literal), r and g are offending to the eye because the eye is invited to imagine, for example, that the relationship of g to r is that g is resonant to p, which is semi-resonant to t, which is resonant to r, but also the inverted path r -> x -> v -> g. The complexity and ambiguity of the relationship is too much for intuitive comprehension, which contrasts with the immediacy, for example, of the resonance between r and t.
 
+The tonnetz is actually a finite structure, periodic in two directions. It is in fact a torus, tessellated into 28 triangles (the narrow triads) and with the 14 tones as vertices. It can be in fact visualized as a geometric torus:
+
+![](assets/tonnetz_torus.png)
+
+Or see also [as an interactive 3d model](https://cancrizans.github.io/hycol_tool/torus).
+
 ### Value
 
 *wip*
 
+### Triadic Painting
+
+Here's a rough practical tutorial on how to lay out a palette for a simple piece in a single narrow triad.
+
+Open the HYCOL tool [here](https://cancrizans.github.io/hycol_tool/). Disable all displays except for the hue wheel, and ensure the number of hue divisions is set at 14. Select the SKN whitepoint to center the view on the skin tone.
+
+We now select a key tone; honey is a good choice. There are two possible triads with h as the key: h/b/p and h/m/n (we can see this from the tonnetz or directly from the color wheel). Let's go with h/b/p. The resonant is blue, which we remind is a vaguely purplish, late-afternoon sky class of blues, while the semi-resonant pink is bordeauxs/violet-reds/burgundies.
+
+Going back to the interface, we add poles until we have three, then we start color picking them. Looking at the 3d view from above, I line up the colors with the corresponding hue lines:
+
+![](assets/tooltut_0.png)
+
+I've chosen very saturated tones for all three, and a rich dark burgundy for pink (if it seems strange, remember categorical shift!). The saturations and values are up to you; harmony only depends on the correct alignment in hue. However, you should try to avoid too desaturated tones, or very low separation in values. I check the values by rotating into side view, and choosing display value levels:
+
+![](assets/tooltut_1.png)
+
+The value range is decent for a soft piece. (If we want to use darker values, we might want to add a scotopic tail, but for now we'll keep it simple.) In this case, the key is the lightest pole, which is usually pretty easy to work with, but it's not mandatory. The key will be emphasized nevertheless by the harmonic information.
+
+In the tool, I create a field, and select poles 0, 1, 2. The following palette is produced by geodesic interpolation of the three poles:
+
+![](assets/tooltut_2.png)
+
+Of course, I can still modify the poles and the field will be updated accordingly. Now as a first approximation, I can basically use any color from this triangle anywhere in the piece and it should look ok, but a better result can be obtained by employing the structure *functionally*. The first note I would make is to mark out the rough region of colors, shaded in red, that are close enough to the complementarity axis of the key to be potentially muddy. This region of the triad is not forbidden, but you want to resist the temptation to linger too much on it if barely. For example, when interpolating from the burgundy to the blue pole, you might wanna "speed up" halfway through to skip the dissonant peak.
+
+![](assets/tooltut_3.png)
+
+In general, you want to bias your palette use towards the edges of the field. In addition, you can divide your image into "background" (context) and "foreground" (subject), and for the background only use the base from burgundy to blue, without mixing in the key. For the foreground you deploy the key, but you can use the entire palette really, interleaving colors from the three ramps (and from inside the field as well) to create an interesting and multidimensional texture.
+
+Note that this automatically gives us a value range hierarchy between background and foreground, since the former is limited in the range of values between the p and b poles, while the latter can go all the way from p to h (the fact that the geodesic interpolation is interpolating the luma at the same rate as the chroma is what guarantees this).
 
 ## Polytriadic Structure
 

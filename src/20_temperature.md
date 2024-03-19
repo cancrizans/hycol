@@ -23,10 +23,10 @@ If isotherm curvature is present towards warmth, then depending on its value we 
 
 I find that the limiting horocyclical case is as good a match with observations than the other two possibilities, and is more parsimonious as it eliminates the parameter of the isotherm curvature. Let's therefore assume the horocyclical model for temperature.
 
-
+*wip*
 
 Here are the isotherms at different luminances, depicted as horizontal strips. The horizontal metric is accurate.
 
 ![](assets/isotherm_strips.png)
 
-The 
+*wip*
