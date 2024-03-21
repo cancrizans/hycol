@@ -106,21 +106,21 @@ $$w = \frac{\ch{\frac{T}{2}}w_0 - \sh{\frac{T}{2}}}{-\sh{\frac{T}{2}}w_0 + \ch{\
 
 with the temperature of the warm whitepoint $N_W$ set to $T_W = 0.25$. This is an isometry, so $w$ also sees the same metric as $$w_0$$. -->
 
-## Summary and Gamuts
+### Summary and Gamuts
 
 The final $(l,w)$ tuple constitute our hyperbolic model of colours. Only a small fraction of the domain is actually occupied by a given gamut. Our interest is specifically in the sRGB gamut. We assume the standard sRGB primary specifications and the D65 whitepoint for conversion sRGB -> CIEXYZ -> CIELAB.
 
-The range of $l$ is from 0 (sRGB black) to 100 (sRGB white). $w$ lies in the unit disk, but in practice for reasonable whitepoints most of the gamut is within $\vert w\vert<0.75$. At fixed $l$ we have a notion of *slice gamut*, which is always contained in the **full gamut**, which is the region in $\mathbb{H}^2$ of all possible values of $w$ for colours in the sRGB gamut. 
+The range of $l$ is from 0 (sRGB black) to 100 (sRGB white). $w$ lies in the unit disk, but in practice for reasonable whitepoints most of the gamut is within $\vert w\vert<0.75$. At fixed $l$ we have a notion of *slice gamut*, which is always contained in the **projected gamut**, which is the region in $\mathbb{H}^2$ of all possible values of $w$ for colours in the sRGB gamut. 
 
-In the diagram, a few slice gamuts are displayed in the Poincaré disk model of chroma space, bounded by the outline of the full gamut.
+In the diagram, a few slice gamuts are displayed in the Poincaré disk model of chroma space, bounded by the outline of the projected gamut.
 
 ![](assets/gamuts.png)
 
-The full gamut is the shape, vaguely circular, outlined by six smooth segments. This boundary is the image of the hexagon of the sRGB primaries and secundaries in the order red -> yellow -> green -> cyan -> blue -> magenta -> red. The images of these segments are not themselves straight segments, and do bulge out considerably.
+The projected gamut is the shape, vaguely circular, outlined by six smooth segments. This boundary is the image of the hexagon of the sRGB primaries and secundaries in the order red -> yellow -> green -> cyan -> blue -> magenta -> red. The images of these segments are not themselves straight segments, and do bulge out considerably.
 
-It would be misleading to display the *interior* of the full gamut all at once on the same plane, because no single value of luma covers it all simultaneously, and variation in luminance will affect colour difference and thus deform the metric.
+It would be misleading to display the *interior* of the full projected gamut all at once on the same plane, because no single value of luma covers it all simultaneously, and variation in luminance will affect colour difference and thus deform the metric.
 
-## Inverse transformation
+### Inverse transformation
 
 The transformation CIELAB -> hyperbolic model is composed of individually invertible elements. Schematically, starting from a hyperbolic colour in the warm frame:
 
@@ -128,3 +128,9 @@ The transformation CIELAB -> hyperbolic model is composed of individually invert
 * HK-corrected luma is recovered from DIN99c by inverting the mapping.
 * Uncorrected CIELAB luma is recovered by inverting the (linear) HK-correction.
 * DIN99c chroma is easily mapped back to CIELAB chroma
+
+## Geometry of Hyperbolic Color
+
+Below are various luma slices of the sRGB gamut in the HYCOL space, with chroma represented in the Poincaré disk model (the disk boundary is outside the image). The metric of the hyperbolic plane cannot be depicted accurately, sadly, but I've overlaid for you a portion of the [Order-7 triangular tiling](https://en.wikipedia.org/wiki/Order-7_triangular_tiling) (subdivided) - all of the edges have in fact equal length, even though they appear to shrink away from the center.
+
+![](assets/atlas.png)

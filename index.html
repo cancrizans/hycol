@@ -201,7 +201,7 @@ The space is highly symmetric which makes the whitepoint arbitrary. For colours 
 $$w = \frac{\ch{\frac{T}{2}}w_0 - \sh{\frac{T}{2}}}{-\sh{\frac{T}{2}}w_0 + \ch{\frac{T}{2}}}$$
 
 with the temperature of the warm whitepoint $N_W$ set to $T_W = 0.25$. This is an isometry, so $w$ also sees the same metric as $$w_0$$. -->
-<h2 id="summary-and-gamuts">Summary and Gamuts</h2>
+<h3 id="summary-and-gamuts">Summary and Gamuts</h3>
 <p>The final
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo>,</mo><mi>w</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(l,w)</annotation></semantics></math>
 tuple constitute our hyperbolic model of colours. Only a small fraction
@@ -219,25 +219,26 @@ of the gamut is within
 At fixed
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>l</mi><annotation encoding="application/x-tex">l</annotation></semantics></math>
 we have a notion of <em>slice gamut</em>, which is always contained in
-the <strong>full gamut</strong>, which is the region in
+the <strong>projected gamut</strong>, which is the region in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>ℍ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\mathbb{H}^2</annotation></semantics></math>
 of all possible values of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
 for colours in the sRGB gamut.</p>
 <p>In the diagram, a few slice gamuts are displayed in the Poincaré disk
-model of chroma space, bounded by the outline of the full gamut.</p>
+model of chroma space, bounded by the outline of the projected
+gamut.</p>
 <p><img src="assets/gamuts.png" /></p>
-<p>The full gamut is the shape, vaguely circular, outlined by six smooth
-segments. This boundary is the image of the hexagon of the sRGB
+<p>The projected gamut is the shape, vaguely circular, outlined by six
+smooth segments. This boundary is the image of the hexagon of the sRGB
 primaries and secundaries in the order red -&gt; yellow -&gt; green
 -&gt; cyan -&gt; blue -&gt; magenta -&gt; red. The images of these
 segments are not themselves straight segments, and do bulge out
 considerably.</p>
 <p>It would be misleading to display the <em>interior</em> of the full
-gamut all at once on the same plane, because no single value of luma
-covers it all simultaneously, and variation in luminance will affect
-colour difference and thus deform the metric.</p>
-<h2 id="inverse-transformation">Inverse transformation</h2>
+projected gamut all at once on the same plane, because no single value
+of luma covers it all simultaneously, and variation in luminance will
+affect colour difference and thus deform the metric.</p>
+<h3 id="inverse-transformation">Inverse transformation</h3>
 <p>The transformation CIELAB -&gt; hyperbolic model is composed of
 individually invertible elements. Schematically, starting from a
 hyperbolic colour in the warm frame:</p>
@@ -250,6 +251,16 @@ mapping.</li>
 HK-correction.</li>
 <li>DIN99c chroma is easily mapped back to CIELAB chroma</li>
 </ul>
+<h2 id="geometry-of-hyperbolic-color">Geometry of Hyperbolic Color</h2>
+<p>Below are various luma slices of the sRGB gamut in the HYCOL space,
+with chroma represented in the Poincaré disk model (the disk boundary is
+outside the image). The metric of the hyperbolic plane cannot be
+depicted accurately, sadly, but I’ve overlaid for you a portion of the
+<a
+href="https://en.wikipedia.org/wiki/Order-7_triangular_tiling">Order-7
+triangular tiling</a> (subdivided) - all of the edges have in fact equal
+length, even though they appear to shrink away from the center.</p>
+<p><img src="assets/atlas.png" /></p>
 <h1 id="temperature-and-reference-frames">Temperature and Reference
 Frames</h1>
 <h2 id="horocyclic-temperature-rationale">Horocyclic Temperature:
