@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>The HYCOL color space</title>
+  <title>10_hycol_space</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -24,9 +24,7 @@
   <![endif]-->
 </head>
 <body>
-<header id="title-block-header">
-<h1 class="title">The HYCOL color space</h1>
-</header>
+<h1 id="the-hycol-color-space">The HYCOL color space</h1>
 <p>HYCOL is a color space I’ve designed which represents colors as
 points in a hyperbolic geometry. Specifically, a color is represented by
 its luma (aka luminance, or value), and chroma (aka chromaticity), and
@@ -416,9 +414,7 @@ ideal warm point, which is always
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mi>W</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">w_W=1</annotation></semantics></math>,
 but the temperature they refer to will be shifted by the temperature of
 the whitepoint itself.</p>
-<h1 id="triangular-blending-and-fields">Triangular Blending and
-Fields</h1>
-<p><em>wip: rewrite for pandoc markdown</em></p>
+<h1 id="geodesic-blending-and-fields">Geodesic Blending and Fields</h1>
 <p>The fundamental object that the theory is based on is the
 <strong>geodesic gradient</strong>, which is the “optimal” interpolation
 between two colours (the vertices), in the sense that it involves the
@@ -455,6 +451,29 @@ with weights
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mi>A</mi></msub><mo>,</mo><msub><mi>λ</mi><mi>B</mi></msub></mrow><annotation encoding="application/x-tex">\lambda_A,\lambda_B</annotation></semantics></math>
 such that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mi>A</mi></msub><mo>+</mo><msub><mi>λ</mi><mi>B</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\lambda_A+\lambda_B=1</annotation></semantics></math>.</p>
+<p><img src="assets/gradients.png" /></p>
+<p><img src="assets/gradients_chroma.png" /></p>
+<p>Visually, the HYCOL geodesic gradient introduces much less spurious
+hues and it is perceived as gentler, almost inoffensive: the geodesic
+gradient introduces no new colors besides the two extremes. By taking
+the shortest possible path between them, it’s almost like it’s not
+saying anything more than the poles themselves are. This will end up
+proving a very useful characteristic for the purpose of regaining
+artistic control over statements made with color - specifically, with
+some caveats, it will be possible to pick freely from geodesic gradients
+(and generalizations) assuming the poles themselves have been chosen
+correctly, since no potentially dissonant colors will have been
+accidentally introduced.</p>
+<p>Because the negative curvature of chroma space makes line segments be
+closer to the origin than they would be in flat space, the middle
+portion of a geodesic gradient is much less saturated than expected.
+Being also optimal in terms of perceptual length, the number of uniquely
+distinguishable shades that interpolate is small - it looks “short”.
+Finally, because HYCOL accounts for the HK effect on digital screens, it
+has a very uniform and gradual luminance slope, while other blendings
+can have occasional bumps and troughs in perceive brightness; the result
+is a vague impression of flatness.</p>
+<h2 id="computation">Computation</h2>
 <p>For the computational aspect, there is a closed form expression for
 such an interpolation as the hyperbolic equivalent of the SLERP
 operation for spherical geometry, sometimes called HLERP. However this

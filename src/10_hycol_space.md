@@ -1,6 +1,5 @@
----
-title: The HYCOL color space
----
+# The HYCOL color space
+
 
 HYCOL is a color space I've designed which represents colors as points in a hyperbolic geometry. Specifically, a color is represented by its luma (aka luminance, or value), and chroma (aka chromaticity), and chroma is understood as a point of the two-dimensional hyperbolic plane, $\mathbb{H}^2$, while luma lies on a half-line. HYCOL is constructed to have, to reasonable accuracy, the following useful properties:
 

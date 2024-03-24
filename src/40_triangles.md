@@ -1,11 +1,20 @@
-# Triangular Blending and Fields
-
-
-*wip: rewrite for pandoc markdown*
+# Geodesic Blending and Fields
 
 The fundamental object that the theory is based on is the **geodesic gradient**, which is the "optimal" interpolation between two colours (the vertices), in the sense that it involves the least possible perceived total colour variation and that such perceived change occurs at constant speed. This is geometrically the geodesic segment between two points, which is the shortest path and, by necessity, of curvature zero.
 
+
 When a geodesic gradient stretches between two vertices with different luminance, the luminance changes at the same rate that the chromaticity does, relative to the total. For example, when we are $1/3$ of the way through from $A$ to $B$, or equivalently we are performing a blend of $A$ and $B$ with weights $2/3$ and $1/3$ respectively, the luminance will be $l_\mathrm{blend} = \frac{2}{3} l_A + \frac{1}{3}l_B$, *and* the chromaticity will be at a distance along the path in the same proportion: $d(w_A,w_\mathrm{blend}) = \frac{1}{2} d(w_B,w_\mathrm{blend})$. This follows from the fact that the colour metric is a product metric, and defines uniquely the geodesic gradient between any two colours, or equivalently the weighted blend between two colours $A$,$B$ with weights $\lambda_A,\lambda_B$ such that $\lambda_A+\lambda_B=1$.
+
+![](assets/gradients.png)
+
+![](assets/gradients_chroma.png)
+
+Visually, the HYCOL geodesic gradient introduces much less spurious hues and it is perceived as gentler, almost inoffensive: the geodesic gradient introduces no new colors besides the two extremes. By taking the shortest possible path between them, it's almost like it's not saying anything more than the poles themselves are. This will end up proving a very useful characteristic for the purpose of regaining artistic control over statements made with color - specifically, with some caveats, it will be possible to pick freely from geodesic gradients (and generalizations) assuming the poles themselves have been chosen correctly, since no potentially dissonant colors will have been accidentally introduced.
+
+Because the negative curvature of chroma space makes line segments be closer to the origin than they would be in flat space, the middle portion of a geodesic gradient is much less saturated than expected. Being also optimal in terms of perceptual length, the number of uniquely distinguishable shades that interpolate is small - it looks "short". Finally, because HYCOL accounts for the HK effect on digital screens, it has a very uniform and gradual luminance slope, while other blendings can have occasional bumps and troughs in perceive brightness; the result is a vague impression of flatness.
+
+
+## Computation
 
 For the computational aspect, there is a closed form expression for such an interpolation as the hyperbolic equivalent of the SLERP operation for spherical geometry, sometimes called HLERP. However this is of limited use, since the generalization to a weighted blend of more than two colours, which we do require extensively, has no closed form solution anyway.
 
